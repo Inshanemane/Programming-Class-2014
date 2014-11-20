@@ -1,0 +1,19 @@
+#Dog class
+
+class Dog:
+    
+    def __init__(self, name, age, colour,yapiness):
+        self.name = name
+        self.age = age
+        self.colour = colour
+        self.yappiness = yapiness
+    
+    def __str__(self):
+        return "A dog named " + self.name + " is " + str(self.age) + " years old, he is the colour " + self.colour
+    
+    
+dog1 = Dog('Judimar', 8 , 'Brown.', 3)
+
+dog2 = Dog('Juanes', 54, 'Green.', 4)
+
+print dog1
