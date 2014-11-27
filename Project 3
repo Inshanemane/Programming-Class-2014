@@ -1,1 +1,102 @@
-1
+import random
+import simplegui
+
+# Load images and save to a list
+
+#Grid of nine
+
+image1 = simplegui.load_image('http://www.dreameasy.com/sites/default/files/imagecache/category_block/100_0.png')
+image2 = simplegui.load_image('http://www.zenimax.com/jpn/fallout3/images/avators/100x100falloutav-vb.gif')
+image3 = simplegui.load_image('http://www.zenimax.com/jpn/fallout3/images/avators/100x100falloutav-vb.gif')
+image4 = simplegui.load_image('http://www.zenimax.com/jpn/fallout3/images/avators/100x100falloutav-vb.gif')
+image5 = simplegui.load_image('http://www.zenimax.com/jpn/fallout3/images/avators/100x100falloutav-vb.gif')
+    
+# Save image widths as a list and image heights as another 
+img_height = []
+img_width  = []
+# Create a dictionary that links images to their width
+# and height.
+
+# Define global variables (constants should be in all caps)
+
+
+# Define helper function to initialize globals. Function
+# should create an image list with two of each image, 
+# then use random.shuffle to change the order. Each image
+# should then be initialized as a new Tile object with
+# its own position on the canvas. These tiles should be 
+# saved into a global list of tiles.
+
+def new_game():
+    pass
+    
+# Definition of a Tile class
+class Tile:
+    
+    # Definition of intializer
+    def __init__(self, image, exposed, location):
+        pass
+        
+    # Definition of getter for image
+    def get_image(self):
+        pass
+    
+    # Check whether tile is exposed
+    def is_exposed(self):
+        pass
+    
+    # Expose the tile
+    def expose_tile(self):
+        pass
+    
+    # Hide the tile       
+    def hide_tile(self):
+        pass
+        
+    # Draw method for tiles.
+    # Draws the image if the tile is exposed and a 
+    # colored rectangle otherwise.
+    def draw_tile(self, canvas):
+        pass
+    
+    # Selection method for tiles.
+    # Returns True if the position of mouse click was 
+    # anywhere within the boundary of the tile and False
+    # otherwise.
+    def is_selected(self, position):
+        pass
+        
+
+# Define mouse click event handler
+# Handler should check wether two tiles have be clicked 
+# on previously. If they don't match, they should be 
+# hidden.  If the current tile is the second one exposed, 
+# the number of turns should be updated.  The state
+# variable can be used to determine whether it's the 
+# first tile of a pair or the second.
+def mouse_click(position):
+    pass
+
+# Start button handler
+def start_button():
+    pass
+    
+# Draw handler.
+# Calls the tile's draw_tile method for each tile.
+def draw_handler(canvas):
+    global image1, image2
+    canvas.draw_image(image1, (50/2, 50/2), (50, 50), (50, 50), (100, 100))
+    canvas.draw_image(image2, (100/2, 100/2), (100, 100), (50, 150), (100, 100))
+# Create frame and add a button and label for turns
+frame = simplegui.create_frame('Nasty in my Taxi', 850, 850)
+
+
+# Set callbacks to handler functions
+
+# Initialize 2 dummy tiles to be used in mouse click 
+# handler to keep track of the current 2 tiles.
+
+
+# Start frame
+frame.set_draw_handler(draw_handler)
+frame.start()
