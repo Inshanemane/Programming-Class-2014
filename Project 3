@@ -2,27 +2,27 @@ import random
 import simplegui
 
 # Load images and save to a list
-
-#Grid of nine
-
+image_list = [
 #BOY
-image1 = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg')
+image1 = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg'),
 
 #Winning
-image2 = simplegui.load_image('http://hellogiggles.com/wp-content/uploads/2013/08/23/breaking-bad-aaron-paul-donuts.jpg')
+image2 = simplegui.load_image('http://hellogiggles.com/wp-content/uploads/2013/08/23/breaking-bad-aaron-paul-donuts.jpg'),
 
 #RICK
-image3 = simplegui.load_image('http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8673142583457162986.jpg')
+image3 = simplegui.load_image('http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8673142583457162986.jpg'),
 
 #SHAUN
-image4 = simplegui.load_image('http://images2.fanpop.com/image/photos/13000000/Shaun-of-the-Dead-shaun-of-the-dead-13053506-640-427.jpg')
+image4 = simplegui.load_image('http://images2.fanpop.com/image/photos/13000000/Shaun-of-the-Dead-shaun-of-the-dead-13053506-640-427.jpg'),
 
 #50 CENT
-image5 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_1392934648_50_cent_11_87.jpg')
+image5 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_1392934648_50_cent_11_87.jpg')]
+
     
 # Save image widths as a list and image heights as another 
 img_height = []
 img_width  = []
+
 # Create a dictionary that links images to their width
 # and height.
 
