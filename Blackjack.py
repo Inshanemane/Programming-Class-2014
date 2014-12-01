@@ -61,11 +61,10 @@ class Card:
         canvas.draw_image(card_images,
                           card_loc,
                           CARD_SIZE,
-                          pos[0]+ CARD_CENTER[0], pos[1] + CARD_CENTER[1],
+                          [pos[0]+ CARD_CENTER[0], pos[1] + CARD_CENTER[1]],
                           CARD_SIZE)
         
-
-          
+card = Card('D','3')
           
 # define hand class
 class Hand:
@@ -122,7 +121,6 @@ def stand():
         
 # draw handler    
 def draw(canvas):
-    global 
     card.draw(canvas, [50,50])
 
 # initialize frame
