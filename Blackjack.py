@@ -64,25 +64,52 @@ class Card:
                           [pos[0]+ CARD_CENTER[0], pos[1] + CARD_CENTER[1]],
                           CARD_SIZE)
         
-card = Card('D','3')
-          
+
 # define hand class
 class Hand:
     def __init__(self):
-        pass
+        self.cards = []
+        
         
     def __str__(self):
-        pass
+        s = ''
+        for card in self.cards:
+            s += str(card) + ' '        
+        return s
     
     def add_card(self, card):
-        pass
-
+        self.cards.append(card)
+        
     def get_value(self):
-        pass
-        
+        v = 0
+        for card in self.cards:
+            v += VALUES[card.rank]
+        for card in self.cards:
+            if card.rank == 'A':
+                if v + 10 <= 21:
+                    v += 10
+        return v
+    
+    
     def draw(self, canvas, pos):
-        pass
+        for card in self.cards:
+            card.draw(canvas,
+                      (pos[0] + CARD_SIZE[0]* self.cards.index(card),
+                       pos[1]))
         
+card1 = Card('D','3')
+card2 = Card('H','5')
+card3 = Card('C','A')
+hand = Hand()
+hand.add_card(card1)
+print hand
+hand.add_card(card2)
+print hand        
+hand.add_card(card3)
+print hand
+
+print hand.get_value() 
+
 # define deck class 
 class Deck:
     def __init__(self):
@@ -121,7 +148,8 @@ def stand():
         
 # draw handler    
 def draw(canvas):
-    card.draw(canvas, [50,50])
+   hand.draw(canvas,(50,50))
+    
 
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
