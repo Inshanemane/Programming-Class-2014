@@ -97,33 +97,32 @@ class Hand:
                       (pos[0] + CARD_SIZE[0]* self.cards.index(card),
                        pos[1]))
         
-card1 = Card('D','3')
-card2 = Card('H','5')
-card3 = Card('C','A')
-hand = Hand()
-hand.add_card(card1)
-print hand
-hand.add_card(card2)
-print hand        
-hand.add_card(card3)
-print hand
 
-print hand.get_value() 
 
 # define deck class 
 class Deck:
     def __init__(self):
-        pass
+        self.cards = []
+        for  suit in SUITS:
+            for rank in RANKS:
+                self.cards.append (Card(suit, rank))
     
     def shuffle(self):
-        pass
+        random.shuffle(self.cards)
     
     def deal_card(self):
-        pass
+        return self.cards.pop(-1)
     
     def __str__(self):
-        pass
-    
+        s = ""
+        for card in self.cards:
+            s += str(card) + " "
+        return s    
+            
+deck = Deck()
+print deck
+deck.shuffle()
+print deck
 #define event handlers for buttons
 
 #count deal in the middle of a round as a forfeit
@@ -148,8 +147,11 @@ def stand():
         
 # draw handler    
 def draw(canvas):
-   hand.draw(canvas,(50,50))
+    pass
     
+      
+   
+   
 
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
