@@ -1,3 +1,4 @@
+#nasty in my taxi
 import random
 import simplegui
 
@@ -5,26 +6,29 @@ import simplegui
 image_list = []
 
 #BOY
-image1 = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg')
-
+IBOY = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg')
 #Winning
-image2 = simplegui.load_image('http://hellogiggles.com/wp-content/uploads/2013/08/23/breaking-bad-aaron-paul-donuts.jpg')
-
+IWIN = simplegui.load_image('http://hellogiggles.com/wp-content/uploads/2013/08/23/breaking-bad-aaron-paul-donuts.jpg')
 #RICK
-image3 = simplegui.load_image('http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8673142583457162986.jpg')
-
+IRICK = simplegui.load_image('http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8673142583457162986.jpg')
 #MONT
-image4 = simplegui.load_image('http://upload.wikimedia.org/wikipedia/commons/e/e4/Bernard_Law_Montgomery.jpg')
+IMONT = simplegui.load_image('http://upload.wikimedia.org/wikipedia/commons/e/e4/Bernard_Law_Montgomery.jpg')
 #50 CENT
-image5 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_1392934648_50_cent_11_87.jpg')
+I50 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_1392934648_50_cent_11_87.jpg')
 
     
 # Save image widths as a list and image heights as another 
-img_height = []
-img_width  = []
+img_width = [IBOY.get_width(),IWIN.get_width(),IRICK.get_width(),
+              IMONT.get_width(),I50.get_width()]
+img_height  = [IBOY.get_height(),IWIN.get_height(),IRICK.get_height(),
+              IMONT.get_height(),I50.get_height()]
 
 # Create a dictionary that links images to their width
 # and height.
+IMGSIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1]),
+           IRICK:(img_width[2],img_height[2]), IMONT:(img_width[3],img_height[3]),
+           I50:(img_width[4],img_height[4])}
+
 
 # Define global variables (constants should be in all caps)
 
@@ -96,23 +100,23 @@ def draw_handler(canvas):
     
     
     #BOY
-    canvas.draw_image(image1, (500/2, 500/2), (500, 500), (100, 100), (200, 200))
-    canvas.draw_image(image1, (500/2, 500/2), (500, 500), (300, 500), (200, 200))
+    canvas.draw_image(IBOY, (500/2, 500/2), (500, 500), (100, 100), (200, 200))
+    canvas.draw_image(IBOY, (500/2, 500/2), (500, 500), (300, 500), (200, 200))
     
     #Center image, cannot be guessed, is displayed upon winning. 
-    canvas.draw_image(image2, (600/2, 450/2), (600, 450), (300, 300), (200, 200))
+    canvas.draw_image(IWIN, (600/2, 450/2), (600, 450), (300, 300), (200, 200))
     
     #RICK
-    canvas.draw_image(image3, (400/2, 300/2), (400, 300), (300, 100), (200, 200))
-    canvas.draw_image(image3, (400/2, 300/2), (400, 300), (500, 300), (200, 200))
+    canvas.draw_image(IRICK, (400/2, 300/2), (400, 300), (300, 100), (200, 200))
+    canvas.draw_image(IRICK, (400/2, 300/2), (400, 300), (500, 300), (200, 200))
     
     #MONT
-    canvas.draw_image(image4, (549/2, 700/2), (549, 700), (500, 100), (200, 200))
-    canvas.draw_image(image4, (549/2, 700/2), (549, 700), (500, 500), (200, 200))
+    canvas.draw_image(IMONT, (549/2, 700/2), (549, 700), (500, 100), (200, 200))
+    canvas.draw_image(IMONT, (549/2, 700/2), (549, 700), (500, 500), (200, 200))
     
     #50 CENT
-    canvas.draw_image(image5, (500/2, 500/2), (500, 500), (100, 500), (200, 200))
-    canvas.draw_image(image5, (500/2, 500/2), (500, 500), (100, 300), (200, 200))
+    canvas.draw_image(I50, (500/2, 500/2), (500, 500), (100, 500), (200, 200))
+    canvas.draw_image(I50, (500/2, 500/2), (500, 500), (100, 300), (200, 200))
     
     
 # Create frame and add a button and label for turns
