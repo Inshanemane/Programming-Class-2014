@@ -1,36 +1,48 @@
-#nasty in my taxi
+#feelin it
 import random
 import simplegui
+
+global IBOY,IWIN,IRICK,IMONT,I50, img_width, img_height, IMG_SIZE
 
 # Load images and save to a list
 image_list = []
 
 #BOY
-IBOY = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg')
+IBOY = simplegui.load_image('''https://pbs.twimg.com/profile_imag
+                            es/462240009374801920/4D8Njtdg.jpeg''')
 #Winning
-IWIN = simplegui.load_image('http://hellogiggles.com/wp-content/uploads/2013/08/23/breaking-bad-aaron-paul-donuts.jpg')
+IWIN = simplegui.load_image('''http://hellogiggles.com/wp-content
+                            /uploads/2013/08/23/breaking-bad-aa
+                            ron-paul-donuts.jpg''')
 #RICK
-IRICK = simplegui.load_image('http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8673142583457162986.jpg')
+IRICK = simplegui.load_image('''http://i.cdn.turner.com/asfix/rep
+                             ository//8a250ba13f865824013fc9db8
+                             b6b0400/thumbnail_8673142583457162986.jpg''')
 #MONT
-IMONT = simplegui.load_image('http://upload.wikimedia.org/wikipedia/commons/e/e4/Bernard_Law_Montgomery.jpg')
+IMONT = simplegui.load_image(''''http://upload.wikimedia.org/wikip
+                             edia/commons/e/e4/Bernard_Law_Montgomery.jpg''')
 #50 CENT
-I50 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_1392934648_50_cent_11_87.jpg')
+I50 = simplegui.load_image('''http://thumbs.hh.ulximg.com/public/
+                           img/avatar/500_1392934648_50_cent_11_87.jpg''')
 
     
 # Save image widths as a list and image heights as another 
 img_width = [IBOY.get_width(),IWIN.get_width(),IRICK.get_width(),
               IMONT.get_width(),I50.get_width()]
-img_height  = [IBOY.get_height(),IWIN.get_height(),IRICK.get_height(),
+
+img_height = [IBOY.get_height(),IWIN.get_height(),IRICK.get_height(),
               IMONT.get_height(),I50.get_height()]
 
 # Create a dictionary that links images to their width
 # and height.
-IMGSIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1]),
+IMG_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1]),
            IRICK:(img_width[2],img_height[2]), IMONT:(img_width[3],img_height[3]),
            I50:(img_width[4],img_height[4])}
 
 
 # Define global variables (constants should be in all caps)
+
+
 
 
 # Define helper function to initialize globals. Function
@@ -48,7 +60,9 @@ class Tile:
     
     # Definition of intializer
     def __init__(self, image, exposed, location):
-        pass
+        image = self.image
+        exposed = self.exposed
+        location = self.location
         
     # Definition of getter for image
     def get_image(self):
