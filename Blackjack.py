@@ -1,22 +1,34 @@
 # Blackjack
 
+#MODIFICATION 1: TEXT CHANGED TO RED / BACKGROUND TO WHITE
+#MODIFICATION 2: 
+
 import simplegui
 import random
+
+MC_RIDE = 1
+
+MC_RIDE1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
+MC_RIDE2 = simplegui.load_image("""https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9a
+                                db85e9e05538d42b36b59_400x400.png""")
 
 # load card sprite - 949x392 - source: jfitz.com
 CARD_SIZE = (73, 98)
 CARD_CENTER = (36.5, 49)
 card_images = simplegui.load_image("http://commondatastorage.googleapis.com/codeskulptor-assets/cards.jfitz.png")
 
+
 CARD_BACK_SIZE = (71, 96)
 CARD_BACK_CENTER = (35.5, 48)
 card_back = simplegui.load_image("http://commondatastorage.googleapis.com/codeskulptor-assets/card_back.png")    
+
 
 # initialize some useful global variables: 
 # boolean in_play, strings player_message and dealer_message
 in_play = False
 player_message = ""
 dealer_message = ""
+
 
 # define globals for cards:
 # tuples for suits and ranks
@@ -26,6 +38,7 @@ RANKS = ('A','2','3','4','5','6','7',
          '8','9','10','J','Q','K')
 VALUES = {'A':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,
           '8':8,'9':9,'10':10,'J':10,'Q':10,'K':10}
+
 
 # define card class
 class Card:
@@ -113,12 +126,15 @@ class Deck:
             s += str(card) + " "
         return s
     
+    
+    
 #define event handlers for buttons
 
 #count deal in the middle of a round as a forfeit
 #initialize deck
 #initialize hands
 #add cards to hands
+
 
 def deal():
     global dealer_message, player_message, in_play
@@ -141,27 +157,76 @@ def deal():
     player_message = "Hit or stand?"
     in_play = True
 
+    
+    
 # if the hand is in play, deal a card to player's hand
 # if busted, update message and in_play status
 def hit():
-    pass
-       
+    global player_message, player_hand, dealer_message, in_play
+    
+    if not in_play:
+        player_message = "Please deal first!"
+        return
+    else:
+        player_hand.add_card(deck.deal_card())
+        
+    player_val = player_hand.get_value()
+    
+    if player_val > 21:
+        # Update Score
+        player_message = "Busted! Deal again?"
+        dealer_message = "Dealer Wins!"
+        in_play = False
+
+
+def glassbreaks():
+    global MC_RIDE
+    
+    MC_RIDE = 2 
+
+        
+        
 # if hand is in play, repeatedly hit dealer until 
 # his hand has value 17 or more
 # update message and in_play
 def stand():
-    pass
+    global dealer_hand, player_message, dealer_message, in_play
     
+    if not in_play:
+        player_message = "Please deal first!"
+        return
+    else:
+        while dealer_hand.get_value() < 17:
+            dealer_hand.add_card(deck.deal_card())
+        dealer_val = dealer_hand.get_value()
         
+        if dealer_val > 21:
+            # Update Score
+            player_message = "Player Wins!"
+            dealer_message = "Busted! Deal again?"
+            in_play = False
+        elif dealer_val >= player_hand.get_value():
+            # Update Score
+            player_message = "Deal again?"
+            dealer_message = "Dealer Wins!"
+            in_play = False
+        else:
+            # Update Score
+            player_message = "Player Wins!"
+            dealer_message = "Deal again?"
+            in_play = False
+            
+       
+            
 # draw handler    
 def draw(canvas):
-    canvas.draw_text("Player's Hand", [50,375],20,"white")
+    canvas.draw_text("Player's Hand", [50,375],20,"red")
     player_hand.draw(canvas,[50,400])
-    canvas.draw_text("Dealer's Hand", [50,175],20,"white")
+    canvas.draw_text("Dealer's Hand", [50,175],20,"red")
     dealer_hand.draw(canvas,[50,200])
-    canvas.draw_text("BLACKJACK", [50,100],40,"white")
-    canvas.draw_text(dealer_message, [300,175],20, "white")
-    canvas.draw_text(player_message, [300,375],20, "white")
+    canvas.draw_text("BLACKJACK", [50,100],40,"red")
+    canvas.draw_text(dealer_message, [300,175],20, "red")
+    canvas.draw_text(player_message, [300,375],20, "red")
     #draw score if you have a score variable
     if in_play:
         canvas.draw_image(card_back,
@@ -171,14 +236,21 @@ def draw(canvas):
                            200 + CARD_BACK_CENTER[1]],
                             CARD_BACK_SIZE)
 
+    if MC_RIDE == 1:
+        canvas.draw_image(MC_RIDE1,(150,150),(300,300),(520,100),(250,250))
+    if MC_RIDE == 2:
+        canvas.draw_image(MC_RIDE2,(200,200),(400,400),(520,100),(250,250))
+    
+    
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
-frame.set_canvas_background("Green")
+frame.set_canvas_background("white")
 
 #create buttons and callbacks
 frame.add_button("Deal", deal, 200)
 frame.add_button("Hit",  hit, 200)
 frame.add_button("Stand", stand, 200)
+frame.add_button("*glass breaks*", glassbreaks,200)
 frame.set_draw_handler(draw)
 
 # get things rolling
