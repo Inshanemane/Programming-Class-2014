@@ -177,13 +177,22 @@ def hit():
         in_play = False
 
 
+        
+        
 def glassbreaks():
     global MC_RIDE, MC_RIDE1, MC_RIDE2
     
     MC_RIDE = not MC_RIDE
 
         
-        
+def MC_Ride():
+    pass
+
+def Zach_Hill():
+    pass
+
+def Andy_Morin():
+    pass
 # if hand is in play, repeatedly hit dealer until 
 # his hand has value 17 or more
 # update message and in_play
@@ -210,8 +219,8 @@ def stand():
             in_play = False
         else:
             # Update Score
-            player_message = "Player Wins!"
-            dealer_message = "Deal again?"
+            player_message = "Deal again?"
+            dealer_message = "Dealers Wins!"
             in_play = False
             
        
@@ -247,10 +256,15 @@ frame.set_canvas_background("white")
 frame.add_button("Deal", deal, 200)
 frame.add_button("Hit",  hit, 200)
 frame.add_button("Stand", stand, 200)
+
 frame.add_button("*glass breaks*", glassbreaks,200)
+
+frame.add_button("MC Ride", MC_Ride, 200)
+frame.add_button("Zach Hill", Zach_Hill,200)
+frame.add_button("Andy Morin", Andy_Morin,200))
+
 frame.set_draw_handler(draw)
 
 # get things rolling
 deal()
 frame.start()
-
