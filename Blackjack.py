@@ -6,12 +6,10 @@
 import simplegui
 import random
 
-MC_RIDE = 1
+MC_RIDE = False
 
 MC_RIDE1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
-MC_RIDE2 = simplegui.load_image("""https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9a
-                                db85e9e05538d42b36b59_400x400.png""")
-
+MC_RIDE2 = simplegui.load_image("https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9adb85e9e05538d42b36b59_400x400.png")
 # load card sprite - 949x392 - source: jfitz.com
 CARD_SIZE = (73, 98)
 CARD_CENTER = (36.5, 49)
@@ -180,9 +178,9 @@ def hit():
 
 
 def glassbreaks():
-    global MC_RIDE
+    global MC_RIDE, MC_RIDE1, MC_RIDE2
     
-    MC_RIDE = 2 
+    MC_RIDE = not MC_RIDE
 
         
         
@@ -236,10 +234,9 @@ def draw(canvas):
                            200 + CARD_BACK_CENTER[1]],
                             CARD_BACK_SIZE)
 
-    if MC_RIDE == 1:
-        canvas.draw_image(MC_RIDE1,(150,150),(300,300),(520,100),(250,250))
-    if MC_RIDE == 2:
-        canvas.draw_image(MC_RIDE2,(200,200),(400,400),(520,100),(250,250))
+    if MC_RIDE:
+        canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))
+
     
     
 # initialize frame
@@ -256,3 +253,4 @@ frame.set_draw_handler(draw)
 # get things rolling
 deal()
 frame.start()
+
