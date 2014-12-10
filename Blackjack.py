@@ -8,8 +8,14 @@ import random
 
 MC_RIDE = False
 
+ANDY_MORIN = False
+
 MC_RIDE1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
 MC_RIDE2 = simplegui.load_image("https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9adb85e9e05538d42b36b59_400x400.png")
+
+ANDY = simplegui.load_image("http://aestheticmag.files.wordpress.com/2013/07/ic4a7394.jpg")
+
+
 # load card sprite - 949x392 - source: jfitz.com
 CARD_SIZE = (73, 98)
 CARD_CENTER = (36.5, 49)
@@ -192,7 +198,12 @@ def Zach_Hill():
     pass
 
 def Andy_Morin():
-    pass
+    global ANDY_MORIN
+    ANDY_MORIN = not ANDY_MORIN
+
+
+
+
 # if hand is in play, repeatedly hit dealer until 
 # his hand has value 17 or more
 # update message and in_play
@@ -246,7 +257,8 @@ def draw(canvas):
     if MC_RIDE:
         canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))
 
-    
+    if ANDY_MORIN:
+        canvas.draw_image(ANDY,(250,100),(500,200),(100,100),(500,200))
     
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
@@ -261,7 +273,7 @@ frame.add_button("*glass breaks*", glassbreaks,200)
 
 frame.add_button("MC Ride", MC_Ride, 200)
 frame.add_button("Zach Hill", Zach_Hill,200)
-frame.add_button("Andy Morin", Andy_Morin,200))
+frame.add_button("Andy Morin", Andy_Morin,200)
 
 frame.set_draw_handler(draw)
 
