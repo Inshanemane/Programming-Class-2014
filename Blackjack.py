@@ -6,11 +6,15 @@
 import simplegui
 import random
 
-MC_RIDE = False
+MC_RIDEg = False
+
+MC_Rideg = False
 
 ANDY_MORIN = False
 
-MC_RIDE1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
+
+MC_Ride1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
+
 MC_RIDE2 = simplegui.load_image("https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9adb85e9e05538d42b36b59_400x400.png")
 
 ANDY = simplegui.load_image("http://aestheticmag.files.wordpress.com/2013/07/ic4a7394.jpg")
@@ -186,13 +190,15 @@ def hit():
         
         
 def glassbreaks():
-    global MC_RIDE, MC_RIDE1, MC_RIDE2
+    global MC_RIDEg, MC_RIDE2
     
-    MC_RIDE = not MC_RIDE
+    MC_RIDEg = not MC_RIDEg
 
         
 def MC_Ride():
-    pass
+    global MC_Rideg
+    
+    MC_Rideg = not MC_Rideg
 
 def Zach_Hill():
     pass
@@ -254,12 +260,14 @@ def draw(canvas):
                            200 + CARD_BACK_CENTER[1]],
                             CARD_BACK_SIZE)
 
-    if MC_RIDE:
+    if MC_RIDEg:
         canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))
 
     if ANDY_MORIN:
-        canvas.draw_image(ANDY,(250,100),(500,200),(100,100),(500,200))
+        canvas.draw_image(ANDY,(250,100),(500,200),(620,100),(500,200))
     
+    if MC_Rideg:
+        canvas.draw_image(MC_Ride1,(150,150),(300,300),(550,550),(300,300))
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
 frame.set_canvas_background("white")
