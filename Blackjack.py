@@ -207,7 +207,8 @@ def MC_Ride():
     MC_Rideg = not MC_Rideg
 
 def Zach_Hill():
-    pass
+    global Zach_Hillg
+    Zach_Hillg = not Zach_Hillg
 
 def Andy_Morin():
     global ANDY_MORIN
@@ -275,8 +276,7 @@ def draw(canvas):
         canvas.draw_image(MC_Ride1,(150,150),(300,300),(550,550),(300,300))
         
     if Zach_Hillg:
-        
-        canvas.draw_image(Zachg,(300,200),(150,100),(300,300),(150,100))
+        canvas.draw_image(Zachg,(787/2,524/2),(787,524),(500,270),(200,150))
         
     if MC_RIDEg:
         canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))    
