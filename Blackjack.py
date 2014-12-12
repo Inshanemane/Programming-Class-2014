@@ -16,7 +16,7 @@ ANDY_MORIN = False
 
 
 
-
+#IMAGES
 MC_Ride1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
 
 MC_RIDE2 = simplegui.load_image("https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9adb85e9e05538d42b36b59_400x400.png")
@@ -24,6 +24,12 @@ MC_RIDE2 = simplegui.load_image("https://pbs.twimg.com/profile_images/3788000007
 Zachg = simplegui.load_image("http://fc00.deviantart.net/fs6/i/2005/076/7/6/Zach_Hill___Hella___Drums_by_ElevationArtFag.jpg")
 
 ANDY = simplegui.load_image("http://aestheticmag.files.wordpress.com/2013/07/ic4a7394.jpg")
+
+
+#MUSIC
+
+gp = simplegui.load_sound('https://www.youtube.com/watch?v=y2cQvZPX3OY')
+bj = simplegui.load_sound('https://www.youtube.com/watch?v=WpxZdL2hQVc')
 
 
 # load card sprite - 949x392 - source: jfitz.com
@@ -247,8 +253,18 @@ def stand():
             dealer_message = "Dealers Wins!"
             in_play = False
             
-       
-            
+
+#MUSIC HANDLING
+def gpmusic(gp):
+    global MC_Rideg
+    
+    if MC_RIDEg:
+        gp.play()
+    else:
+        gp.pause()
+        gp.rewind()
+    
+    
 # draw handler    
 def draw(canvas):
     canvas.draw_text("Player's Hand", [50,375],20,"red")
