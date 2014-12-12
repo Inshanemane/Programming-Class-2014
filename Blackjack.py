@@ -28,7 +28,7 @@ ANDY = simplegui.load_image("http://aestheticmag.files.wordpress.com/2013/07/ic4
 
 #MUSIC
 
-gp = simplegui.load_sound('https://www.youtube.com/watch?v=y2cQvZPX3OY')
+
 bj = simplegui.load_sound('https://www.youtube.com/watch?v=WpxZdL2hQVc')
 
 
@@ -255,14 +255,15 @@ def stand():
             
 
 #MUSIC HANDLING
-def gpmusic(gp):
-    global MC_Rideg
-    
-    if MC_RIDEg:
-        gp.play()
-    else:
-        gp.pause()
-        gp.rewind()
+gp = simplegui.load_sound('https://www.youtube.com/watch?v=y2cQvZPX3OY')
+if MC_RIDEg:    
+    global gp
+    gp.play()
+    gp.set_volume(6)
+else:
+    global gp
+    gp.pause()
+    gp.rewind()
     
     
 # draw handler    
