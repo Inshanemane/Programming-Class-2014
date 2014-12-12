@@ -10,12 +10,18 @@ MC_RIDEg = False
 
 MC_Rideg = False
 
+Zach_Hillg = False
+
 ANDY_MORIN = False
+
+
 
 
 MC_Ride1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
 
 MC_RIDE2 = simplegui.load_image("https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9adb85e9e05538d42b36b59_400x400.png")
+
+Zachg = simplegui.load_image("http://fc00.deviantart.net/fs6/i/2005/076/7/6/Zach_Hill___Hella___Drums_by_ElevationArtFag.jpg")
 
 ANDY = simplegui.load_image("http://aestheticmag.files.wordpress.com/2013/07/ic4a7394.jpg")
 
@@ -260,14 +266,21 @@ def draw(canvas):
                            200 + CARD_BACK_CENTER[1]],
                             CARD_BACK_SIZE)
 
-    if MC_RIDEg:
-        canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))
+    
 
     if ANDY_MORIN:
-        canvas.draw_image(ANDY,(250,100),(500,200),(620,100),(500,200))
+        canvas.draw_image(ANDY,(350,80),(500,160),(629,70),(500,160))
     
     if MC_Rideg:
         canvas.draw_image(MC_Ride1,(150,150),(300,300),(550,550),(300,300))
+        
+    if Zach_Hillg:
+        
+        canvas.draw_image(Zachg,(300,200),(150,100),(300,300),(150,100))
+        
+    if MC_RIDEg:
+        canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))    
+        
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
 frame.set_canvas_background("white")
