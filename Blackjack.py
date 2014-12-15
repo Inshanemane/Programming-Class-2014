@@ -254,17 +254,7 @@ def stand():
             in_play = False
             
 
-#MUSIC HANDLING
-gp = simplegui.load_sound('https://www.youtube.com/watch?v=y2cQvZPX3OY')
-if MC_RIDEg:    
-    global gp
-    gp.play()
-    gp.set_volume(6)
-else:
-    global gp
-    gp.pause()
-    gp.rewind()
-    
+
     
 # draw handler    
 def draw(canvas):
@@ -297,6 +287,22 @@ def draw(canvas):
         
     if MC_RIDEg:
         canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))    
+  
+        
+        
+#MUSIC HANDLING
+
+mc = simplegui.load_sound('https://www.youtube.com/watch?v=y2cQvZPX3OY')
+if MC_RIDEg:    
+    mc.set_volume(1)
+    mc.rewind()
+    mc.play()
+    
+else:
+    mc.pause()
+    
+            
+        
         
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
@@ -318,3 +324,4 @@ frame.set_draw_handler(draw)
 # get things rolling
 deal()
 frame.start()
+
