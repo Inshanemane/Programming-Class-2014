@@ -27,9 +27,9 @@ ANDY = simplegui.load_image("http://aestheticmag.files.wordpress.com/2013/07/ic4
 
 
 #MUSIC
+mc = simplegui.load_sound('https://dl.dropboxusercontent.com/s/zp65mnbt5ehbexm/Programming.mp3')
 
-
-bj = simplegui.load_sound('https://www.youtube.com/watch?v=WpxZdL2hQVc')
+bj = simplegui.load_sound('https://dl.dropboxusercontent.com/s/d9untr3sy6rstpc/04.%20Blackjack.mp3')
 
 
 # load card sprite - 949x392 - source: jfitz.com
@@ -202,10 +202,18 @@ def hit():
         
         
 def glassbreaks():
-    global MC_RIDEg, MC_RIDE2
+    global MC_RIDEg, MC_RIDE2, mc
     
     MC_RIDEg = not MC_RIDEg
 
+
+    if MC_RIDEg:    
+        mc.set_volume(1)
+        mc.rewind()
+        mc.play()
+    
+    else:
+        mc.pause()
         
 def MC_Ride():
     global MC_Rideg
@@ -220,8 +228,16 @@ def Andy_Morin():
     global ANDY_MORIN
     ANDY_MORIN = not ANDY_MORIN
 
-
-
+def launch():
+    global MC_Rideg, Zach_Hillg, ANDY_MORIN, bj
+    
+    if MC_Rideg:
+        if Zach_Hillg:
+            if ANDY_MORIN:
+                bj.set_volume(1)
+                bj.play()
+    else:
+        bj.pause()
 
 # if hand is in play, repeatedly hit dealer until 
 # his hand has value 17 or more
@@ -289,21 +305,7 @@ def draw(canvas):
         canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))    
   
         
-        
-#MUSIC HANDLING
-
-mc = simplegui.load_sound('https://www.youtube.com/watch?v=y2cQvZPX3OY')
-if MC_RIDEg:    
-    mc.set_volume(1)
-    mc.rewind()
-    mc.play()
-    
-else:
-    mc.pause()
-    
-            
-        
-        
+         
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
 frame.set_canvas_background("white")
@@ -319,9 +321,10 @@ frame.add_button("MC Ride", MC_Ride, 200)
 frame.add_button("Zach Hill", Zach_Hill,200)
 frame.add_button("Andy Morin", Andy_Morin,200)
 
+frame.add_button("blackjack", launch,200)
+
 frame.set_draw_handler(draw)
 
 # get things rolling
 deal()
 frame.start()
-
