@@ -3,32 +3,27 @@
 #MODIFICATION 1: TEXT CHANGED TO RED / BACKGROUND TO WHITE
 #MODIFICATION 2: 
 
+#ADDITION 1:
+#ADDITION 2:
+
 import simplegui
 import random
 
 MC_RIDEg = False
-
 MC_Rideg = False
-
 Zach_Hillg = False
-
 ANDY_MORIN = False
-
 
 
 #IMAGES
 MC_Ride1 = simplegui.load_image("http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=84620859")
-
 MC_RIDE2 = simplegui.load_image("https://pbs.twimg.com/profile_images/378800000758437408/b5f3cc10d9adb85e9e05538d42b36b59_400x400.png")
-
 Zachg = simplegui.load_image("http://fc00.deviantart.net/fs6/i/2005/076/7/6/Zach_Hill___Hella___Drums_by_ElevationArtFag.jpg")
-
 ANDY = simplegui.load_image("http://aestheticmag.files.wordpress.com/2013/07/ic4a7394.jpg")
 
 
 #MUSIC
 mc = simplegui.load_sound('https://dl.dropboxusercontent.com/s/zp65mnbt5ehbexm/Programming.mp3')
-
 bj = simplegui.load_sound('https://dl.dropboxusercontent.com/s/d9untr3sy6rstpc/04.%20Blackjack.mp3')
 
 
@@ -194,40 +189,43 @@ def hit():
     
     if player_val > 21:
         # Update Score
-        player_message = "Busted! Deal again?"
+        player_message = "! Deal again?"
         dealer_message = "Dealer Wins!"
         in_play = False
 
-
         
-        
+#MUSIC FUNCTIONS        
 def glassbreaks():
-    global MC_RIDEg, MC_RIDE2, mc
+    global MC_RIDEg, MC_RIDE2, mc    
     
     MC_RIDEg = not MC_RIDEg
-
-
+    
     if MC_RIDEg:    
         mc.set_volume(1)
         mc.rewind()
-        mc.play()
-    
+        mc.play()    
     else:
         mc.pause()
+      
         
 def MC_Ride():
     global MC_Rideg
     
     MC_Rideg = not MC_Rideg
 
+    
 def Zach_Hill():
     global Zach_Hillg
+    
     Zach_Hillg = not Zach_Hillg
 
+    
 def Andy_Morin():
     global ANDY_MORIN
+    
     ANDY_MORIN = not ANDY_MORIN
 
+    
 def launch():
     global MC_Rideg, Zach_Hillg, ANDY_MORIN, bj
     
@@ -239,6 +237,7 @@ def launch():
     else:
         bj.pause()
 
+        
 # if hand is in play, repeatedly hit dealer until 
 # his hand has value 17 or more
 # update message and in_play
@@ -291,7 +290,6 @@ def draw(canvas):
                             CARD_BACK_SIZE)
 
     
-
     if ANDY_MORIN:
         canvas.draw_image(ANDY,(350,80),(500,160),(629,70),(500,160))
     
@@ -314,7 +312,7 @@ frame.set_canvas_background("white")
 frame.add_button("Deal", deal, 200)
 frame.add_button("Hit",  hit, 200)
 frame.add_button("Stand", stand, 200)
-
+label = frame.add_label('-------------------------------------')
 frame.add_button("*glass breaks*", glassbreaks,200)
 
 frame.add_button("MC Ride", MC_Ride, 200)
