@@ -27,6 +27,8 @@ mc = simplegui.load_sound('https://dl.dropboxusercontent.com/s/zp65mnbt5ehbexm/P
 bj = simplegui.load_sound('https://dl.dropboxusercontent.com/s/d9untr3sy6rstpc/04.%20Blackjack.mp3')
 
 
+score = 0
+
 # load card sprite - 949x392 - source: jfitz.com
 CARD_SIZE = (73, 98)
 CARD_CENTER = (36.5, 49)
@@ -152,11 +154,13 @@ class Deck:
 
 
 def deal():
-    global dealer_message, player_message, in_play
+    global dealer_message, player_message, in_play, score
     global deck, player_hand, dealer_hand
     if in_play:
         dealer_message = "You forfeit, dealer wins."
         # update score if you have a score variable
+        if score > 0:
+            score-=1
         in_play = False
 
     deck = Deck()
@@ -189,7 +193,7 @@ def hit():
     
     if player_val > 21:
         # Update Score
-        player_message = "! Deal again?"
+        player_message = "Deal again?"
         dealer_message = "Dealer Wins!"
         in_play = False
 
@@ -242,7 +246,7 @@ def launch():
 # his hand has value 17 or more
 # update message and in_play
 def stand():
-    global dealer_hand, player_message, dealer_message, in_play
+    global dealer_hand, player_message, dealer_message, in_play, score
     
     if not in_play:
         player_message = "Please deal first!"
@@ -256,16 +260,21 @@ def stand():
             # Update Score
             player_message = "Player Wins!"
             dealer_message = "Busted! Deal again?"
+            score += 1
             in_play = False
         elif dealer_val >= player_hand.get_value():
             # Update Score
             player_message = "Deal again?"
             dealer_message = "Dealer Wins!"
+            if score > 0:
+                score-=1
             in_play = False
         else:
             # Update Score
             player_message = "Deal again?"
             dealer_message = "Dealers Wins!"
+            if score > 0:
+                score-=1
             in_play = False
             
 
@@ -281,6 +290,10 @@ def draw(canvas):
     canvas.draw_text(dealer_message, [300,175],20, "red")
     canvas.draw_text(player_message, [300,375],20, "red")
     #draw score if you have a score variable
+    canvas.draw_text(score, [10,10],20,"red")
+    
+    
+    
     if in_play:
         canvas.draw_image(card_back,
                           CARD_BACK_CENTER,
