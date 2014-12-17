@@ -5,7 +5,7 @@
 #SIZE OF DEALER / HAND PLAYER TEXT AS WEll AS INSTRUCTION
 
 #ADDITION 1: Music
-#ADDITION 2: Score changing
+#ADDITION 2: Score changing / Colour of score changes
 
 import simplegui
 import random
@@ -32,6 +32,7 @@ bj = simplegui.load_sound('https://dl.dropboxusercontent.com/s/d9untr3sy6rstpc/0
 score = 0
 
 scolor = "red"
+
 # load card sprite - 949x392 - source: jfitz.com
 CARD_SIZE = (73, 98)
 CARD_CENTER = (36.5, 49)
@@ -157,13 +158,13 @@ class Deck:
 
 
 def deal():
-    global dealer_message, player_message, in_play, score
+    global dealer_message, player_message, in_play, score, scolor
     global deck, player_hand, dealer_hand
     if in_play:
         dealer_message = "You forfeit, dealer wins."
         # update score if you have a score variable
         if score > 0:
-            score-=1
+            score-=1            
         in_play = False
 
     deck = Deck()
@@ -178,13 +179,17 @@ def deal():
     
     player_message = "Hit or stand?"
     in_play = True
-
+    
+    if score > 0:
+        scolor = "green"
+    if score == 0:
+        scolor == "red"
     
     
 # if the hand is in play, deal a card to player's hand
 # if busted, update message and in_play status
 def hit():
-    global player_message, player_hand, dealer_message, in_play
+    global player_message, player_hand, dealer_message, in_play, score, scolor
     
     if not in_play:
         player_message = "Please deal first!"
@@ -198,9 +203,55 @@ def hit():
         # Update Score
         player_message = "Deal again?"
         dealer_message = "Dealer Wins!"
+        if score > 0:
+            score -=1
         in_play = False
 
+    if score > 0:
+        scolor = "green"
+    if score == 0:
+        scolor = "red"
+
+# if hand is in play, repeatedly hit dealer until 
+# his hand has value 17 or more
+# update message and in_play
+def stand():
+    global dealer_hand, player_message, dealer_message, in_play, score, scolor
+    
+    if not in_play:
+        player_message = "Please deal first!"
+        return
+    else:
+        while dealer_hand.get_value() < 17:
+            dealer_hand.add_card(deck.deal_card())
+        dealer_val = dealer_hand.get_value()
         
+        if dealer_val > 21:
+            # Update Score
+            player_message = "Player Wins!"
+            dealer_message = "Busted! Deal again?"
+            score += 1            
+            in_play = False
+        elif dealer_val >= player_hand.get_value():
+            # Update Score
+            player_message = "Deal again?"
+            dealer_message = "Dealer Wins!"
+            if score > 0:
+                score-=1               
+            in_play = False
+        else:
+            # Update Score
+            player_message = "Deal again?"
+            dealer_message = "Dealers Wins!"
+            if score > 0:
+                score-=1                
+            in_play = False
+      
+    if score > 0:
+        scolor = "green"
+    if score == 0:
+        scolor = "red"              
+
 #MUSIC FUNCTIONS        
 def glassbreaks():
     global MC_RIDEg, MC_RIDE2, mc    
@@ -244,43 +295,7 @@ def launch():
     else:
         bj.pause()
 
-        
-# if hand is in play, repeatedly hit dealer until 
-# his hand has value 17 or more
-# update message and in_play
-def stand():
-    global dealer_hand, player_message, dealer_message, in_play, score
-    
-    if not in_play:
-        player_message = "Please deal first!"
-        return
-    else:
-        while dealer_hand.get_value() < 17:
-            dealer_hand.add_card(deck.deal_card())
-        dealer_val = dealer_hand.get_value()
-        
-        if dealer_val > 21:
-            # Update Score
-            player_message = "Player Wins!"
-            dealer_message = "Busted! Deal again?"
-            score += 1
-            in_play = False
-        elif dealer_val >= player_hand.get_value():
-            # Update Score
-            player_message = "Deal again?"
-            dealer_message = "Dealer Wins!"
-            if score > 0:
-                score-=1
-            in_play = False
-        else:
-            # Update Score
-            player_message = "Deal again?"
-            dealer_message = "Dealers Wins!"
-            if score > 0:
-                score-=1
-            in_play = False
-            
-       
+                    
     
 # draw handler    
 def draw(canvas):
@@ -292,8 +307,8 @@ def draw(canvas):
     canvas.draw_text(dealer_message, [300,175],15, "red")
     canvas.draw_text(player_message, [300,375],15, "red")
     #draw score if you have a score variable
-    canvas.draw_text("Score:", [20,25],20,"red")
-    canvas.draw_text(str(score), [75,25],20,"black")
+    canvas.draw_text("Score:", [20,25],20,"black")
+    canvas.draw_text(str(score), [75,25],20,scolor)
     
     
     
