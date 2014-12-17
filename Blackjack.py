@@ -1,10 +1,11 @@
 # Blackjack
 
 #MODIFICATION 1: TEXT CHANGED TO RED / BACKGROUND TO WHITE
-#MODIFICATION 2: 
+#MODIFICATION 2: INCREASED SIZE OF BLACKJACK SIGN / DECREASED 
+#SIZE OF DEALER / HAND PLAYER TEXT AS WEll AS INSTRUCTION
 
-#ADDITION 1:
-#ADDITION 2:
+#ADDITION 1: Music
+#ADDITION 2: Score changing
 
 import simplegui
 import random
@@ -27,8 +28,10 @@ mc = simplegui.load_sound('https://dl.dropboxusercontent.com/s/zp65mnbt5ehbexm/P
 bj = simplegui.load_sound('https://dl.dropboxusercontent.com/s/d9untr3sy6rstpc/04.%20Blackjack.mp3')
 
 
+#Score
 score = 0
 
+scolor = "red"
 # load card sprite - 949x392 - source: jfitz.com
 CARD_SIZE = (73, 98)
 CARD_CENTER = (36.5, 49)
@@ -277,21 +280,20 @@ def stand():
                 score-=1
             in_play = False
             
-
-
+       
     
 # draw handler    
 def draw(canvas):
-    canvas.draw_text("Player's Hand", [50,375],20,"red")
+    canvas.draw_text("Player's Hand", [50,375],15,"red")
     player_hand.draw(canvas,[50,400])
-    canvas.draw_text("Dealer's Hand", [50,175],20,"red")
+    canvas.draw_text("Dealer's Hand", [50,175],15,"red")
     dealer_hand.draw(canvas,[50,200])
-    canvas.draw_text("BLACKJACK", [50,100],40,"red")
-    canvas.draw_text(dealer_message, [300,175],20, "red")
-    canvas.draw_text(player_message, [300,375],20, "red")
+    canvas.draw_text("BLACKJACK", [50,100],50,"red")
+    canvas.draw_text(dealer_message, [300,175],15, "red")
+    canvas.draw_text(player_message, [300,375],15, "red")
     #draw score if you have a score variable
     canvas.draw_text("Score:", [20,25],20,"red")
-    canvas.draw_text(str(score), [75,25],20,"red")
+    canvas.draw_text(str(score), [75,25],20,"black")
     
     
     
@@ -317,7 +319,9 @@ def draw(canvas):
         canvas.draw_image(MC_RIDE2,(200,200),(400,400),(300,300),(600,600))    
   
         
-         
+
+        
+        
 # initialize frame
 frame = simplegui.create_frame("Blackjack", 600, 600)
 frame.set_canvas_background("white")
