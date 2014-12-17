@@ -290,7 +290,8 @@ def draw(canvas):
     canvas.draw_text(dealer_message, [300,175],20, "red")
     canvas.draw_text(player_message, [300,375],20, "red")
     #draw score if you have a score variable
-    canvas.draw_text(score, [10,10],20,"red")
+    canvas.draw_text("Score:", [20,25],20,"red")
+    canvas.draw_text(str(score), [75,25],20,"red")
     
     
     
@@ -325,14 +326,36 @@ frame.set_canvas_background("white")
 frame.add_button("Deal", deal, 200)
 frame.add_button("Hit",  hit, 200)
 frame.add_button("Stand", stand, 200)
-label = frame.add_label('-------------------------------------')
+
+frame.add_label('-------------------------------------')
+
+frame.add_label("Music takes time to load")
+frame.add_label("Music is loud")
+frame.add_label("Music contains explicit language")
+
+frame.add_label('-------------------------------------')
+
 frame.add_button("*glass breaks*", glassbreaks,200)
+
+frame.add_label("")
 
 frame.add_button("MC Ride", MC_Ride, 200)
 frame.add_button("Zach Hill", Zach_Hill,200)
 frame.add_button("Andy Morin", Andy_Morin,200)
 
-frame.add_button("blackjack", launch,200)
+frame.add_label('-------------------------------------')
+
+label = frame.add_label("""Hint: Have MC Ride, Zach Hill, as 
+                         well as Andy Morin up at the same time
+                         and hit blackjack for a surprise!""")
+
+frame.add_label("")
+
+frame.add_label("May take time to load")
+
+frame.add_label('-------------------------------------')
+
+frame.add_button("blackjack",launch,200)
 
 frame.set_draw_handler(draw)
 
