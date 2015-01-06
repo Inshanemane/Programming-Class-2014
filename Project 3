@@ -2,7 +2,7 @@
 import random
 import simplegui
 
-global IBOY, IWIN, IRICK, IMONT, I50, img_width, img_height, IMG_SIZE
+global IBOY,IWIN,IRICK,IMONT,I50, img_width, img_height, IMG_SIZE
 
 # Load images and save to a list
 image_list = []
@@ -17,20 +17,25 @@ IRICK = simplegui.load_image('http://i.cdn.turner.com/asfix/repository//8a250ba1
 IMONT = simplegui.load_image('http://upload.wikimedia.org/wikipedia/commons/e/e4/Bernard_Law_Montgomery.jpg')
 #50 CENT
 I50 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_1392934648_50_cent_11_87.jpg')
+#MOTOR VEHICLE
+ICAR = simplegui.load_image('http://4.bp.blogspot.com/-Jb0tgFtBByM/UvpGPMC8psI/AAAAAAAAAPE/ByAbeJWQBZM/s1600/auto+clipart+2.png')
+#ROCK
+IROCK = simplegui.load_image('http://newsdesk.si.edu/sites/default/files/imagecache/snapshot_image/PlymouthRockPiece.jpg')
 
-    
+
+
 # Save image widths as a list and image heights as another 
 img_width = [IBOY.get_width(),IWIN.get_width(),IRICK.get_width(),
-              IMONT.get_width(),I50.get_width()]
+              IMONT.get_width(),I50.get_width(),ICAR.get_width(),IROCK.get_width()]
 
 img_height = [IBOY.get_height(),IWIN.get_height(),IRICK.get_height(),
-              IMONT.get_height(),I50.get_height()]
+              IMONT.get_height(),I50.get_height(),ICAR.get_height(),IROCK.get_height()]
 
 # Create a dictionary that links images to their width
 # and height.
 IMG_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1]),
            IRICK:(img_width[2],img_height[2]), IMONT:(img_width[3],img_height[3]),
-           I50:(img_width[4],img_height[4])}
+           I50:(img_width[4],img_height[4]),ICAR:(img_width[5],img_height[5]),IROCK:(img_width[6],img_height[6])}
 
 
 # Define global variables (constants should be in all caps)
@@ -125,10 +130,13 @@ def draw_handler(canvas):
     canvas.draw_image(I50, (img_width[4]/2,img_height[4]/2), (IMG_SIZE.get(I50)), (100, 500), (200, 200))
     canvas.draw_image(I50, (img_width[4]/2,img_height[4]/2), (IMG_SIZE.get(I50)), (100, 300), (200, 200))
     
+    #ICAR
+    canvas.draw_image(ICAR, (img_width[5]/2,img_height[5]/2), (IMG_SIZE.get(ICAR)), (700, 100), (200, 200))
+    canvas.draw_image(ICAR, (img_width[5]/2,img_height[5]/2), (IMG_SIZE.get(ICAR)), (700, 500), (200, 200))
     
-    
-    
-    
+    #IROCK
+    canvas.draw_image(IROCK, (img_width[6]/2,img_height[6]/2), (IMG_SIZE.get(IROCK)), (700, 700), (200, 200))
+    canvas.draw_image(IROCK, (img_width[6]/2,img_height[6]/2), (IMG_SIZE.get(IROCK)), (100, 700), (200, 200))
 # Create frame and add a button and label for turns
 frame = simplegui.create_frame('MEMORY', 800, 800)
 
