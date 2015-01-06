@@ -2,28 +2,21 @@
 import random
 import simplegui
 
-global IBOY,IWIN,IRICK,IMONT,I50, img_width, img_height, IMG_SIZE
+global IBOY, IWIN, IRICK, IMONT, I50, img_width, img_height, IMG_SIZE
 
 # Load images and save to a list
 image_list = []
 
 #BOY
-IBOY = simplegui.load_image('''https://pbs.twimg.com/profile_imag
-                            es/462240009374801920/4D8Njtdg.jpeg''')
+IBOY = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg')
 #Winning
-IWIN = simplegui.load_image('''http://hellogiggles.com/wp-content
-                            /uploads/2013/08/23/breaking-bad-aa
-                            ron-paul-donuts.jpg''')
+IWIN = simplegui.load_image('http://hellogiggles.com/wp-content/uploads/2013/08/23/breaking-bad-aaron-paul-donuts.jpg')
 #RICK
-IRICK = simplegui.load_image('''http://i.cdn.turner.com/asfix/rep
-                             ository//8a250ba13f865824013fc9db8
-                             b6b0400/thumbnail_8673142583457162986.jpg''')
+IRICK = simplegui.load_image('http://i.cdn.turner.com/asfix/repository//8a250ba13f865824013fc9db8b6b0400/thumbnail_8673142583457162986.jpg')
 #MONT
-IMONT = simplegui.load_image(''''http://upload.wikimedia.org/wikip
-                             edia/commons/e/e4/Bernard_Law_Montgomery.jpg''')
+IMONT = simplegui.load_image('http://upload.wikimedia.org/wikipedia/commons/e/e4/Bernard_Law_Montgomery.jpg')
 #50 CENT
-I50 = simplegui.load_image('''http://thumbs.hh.ulximg.com/public/
-                           img/avatar/500_1392934648_50_cent_11_87.jpg''')
+I50 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_1392934648_50_cent_11_87.jpg')
 
     
 # Save image widths as a list and image heights as another 
@@ -111,30 +104,33 @@ def start_button():
 # Draw handler.
 # Calls the tile's draw_tile method for each tile.
 def draw_handler(canvas):
-    
-    
+        
     #BOY
-    canvas.draw_image(IBOY, (500/2, 500/2), (500, 500), (100, 100), (200, 200))
-    canvas.draw_image(IBOY, (500/2, 500/2), (500, 500), (300, 500), (200, 200))
+    canvas.draw_image(IBOY, (img_width[0]/2,img_height[0]/2), (IMG_SIZE.get(IBOY)), (100, 100), (200, 200))
+    canvas.draw_image(IBOY, (img_width[0]/2,img_height[0]/2), (IMG_SIZE.get(IBOY)), (300, 500), (200, 200))
     
-    #Center image, cannot be guessed, is displayed upon winning. 
-    canvas.draw_image(IWIN, (600/2, 450/2), (600, 450), (300, 300), (200, 200))
+    #AARON
+    canvas.draw_image(IWIN, (img_width[1]/2,img_height[1]/2), (IMG_SIZE.get(IWIN)), (300, 300), (200, 200))
+    canvas.draw_image(IWIN, (img_width[1]/2,img_height[1]/2), (IMG_SIZE.get(IWIN)), (300, 700), (200, 200))
     
     #RICK
-    canvas.draw_image(IRICK, (400/2, 300/2), (400, 300), (300, 100), (200, 200))
-    canvas.draw_image(IRICK, (400/2, 300/2), (400, 300), (500, 300), (200, 200))
+    canvas.draw_image(IRICK, (img_width[2]/2,img_height[2]/2), (IMG_SIZE.get(IRICK)), (300, 100), (200, 200))
+    canvas.draw_image(IRICK, (img_width[2]/2,img_height[2]/2), (IMG_SIZE.get(IRICK)), (500, 300), (200, 200))
     
     #MONT
-    canvas.draw_image(IMONT, (549/2, 700/2), (549, 700), (500, 100), (200, 200))
-    canvas.draw_image(IMONT, (549/2, 700/2), (549, 700), (500, 500), (200, 200))
+    canvas.draw_image(IMONT, (img_width[3]/2,img_height[3]/2), (IMG_SIZE.get(IMONT)), (500, 100), (200, 200))
+    canvas.draw_image(IMONT, (img_width[3]/2,img_height[3]/2), (IMG_SIZE.get(IMONT)), (500, 500), (200, 200))
     
     #50 CENT
-    canvas.draw_image(I50, (500/2, 500/2), (500, 500), (100, 500), (200, 200))
-    canvas.draw_image(I50, (500/2, 500/2), (500, 500), (100, 300), (200, 200))
+    canvas.draw_image(I50, (img_width[4]/2,img_height[4]/2), (IMG_SIZE.get(I50)), (100, 500), (200, 200))
+    canvas.draw_image(I50, (img_width[4]/2,img_height[4]/2), (IMG_SIZE.get(I50)), (100, 300), (200, 200))
+    
+    
+    
     
     
 # Create frame and add a button and label for turns
-frame = simplegui.create_frame('Nasty in my Taxi', 600, 600)
+frame = simplegui.create_frame('MEMORY', 800, 800)
 
 
 # Set callbacks to handler functions
