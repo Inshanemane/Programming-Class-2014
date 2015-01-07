@@ -2,7 +2,7 @@
 import random
 import simplegui
 
-global IBOY,IWIN,IRICK,IMONT,I50, img_width, img_height, IMG_SIZE
+global IBOY,IWIN,IRICK,IMONT,I50,img_width,img_height,IMG_SIZE
 
 # Load images and save to a list
 image_list = []
@@ -43,40 +43,35 @@ IMG_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1])
 
 # Define global variables (constants should be in all caps)
 
-
-
-
-# Define helper function to initialize globals. Function
-# should create an image list with two of each image, 
-# then use random.shuffle to change the order. Each image
-# should then be initialized as a new Tile object with
-# its own position on the canvas. These tiles should be 
-# saved into a global list of tiles.
-
-def new_game():
-    pass
-    
 # Definition of a Tile class
 class Tile:
     
     # Definition of intializer
-    def __init__(self, image, exposed, location):
-        image = self.image
-        exposed = self.exposed
-        location = self.location
+    def __init__(self, image, exposed):
+        self.image = image 
+        self.exposed = exposed
+        self.location = location
         
     # Definition of getter for image
     def get_image(self):
-        pass
+        return self.image
     
     # Check whether tile is exposed
     def is_exposed(self):
-        pass
+        return self.exposed 
     
     # Expose the tile
-    def expose_tile(self):
-        pass
+    def set_expose_tile(self, exposed):
+        self.exposed = exposed
     
+    def get_tilewidth(self):
+        self.image = image
+        image.get_width()
+    
+    def get_tileheight(self):
+        self.image = image
+        image.get_height()
+        
     # Hide the tile       
     def hide_tile(self):
         pass
@@ -93,8 +88,23 @@ class Tile:
     # otherwise.
     def is_selected(self, position):
         pass
-        
 
+
+# Define helper function to initialize globals. Function
+# should create an image list with two of each image, 
+# then use random.shuffle to change the order. Each image
+# should then be initialized as a new Tile object with
+# its own position on the canvas. These tiles should be 
+# saved into a global list of tiles.
+
+    
+def new_game():     
+	fiftycent = Tile(I50, False)
+
+	tiles = [fiftycent, bush]
+        
+        
+        
 # Define mouse click event handler
 # Handler should check wether two tiles have be clicked 
 # on previously. If they don't match, they should be 
@@ -156,5 +166,6 @@ frame = simplegui.create_frame('MEMORY', 800, 800)
 
 
 # Start frame
+new_game()
 frame.set_draw_handler(draw_handler)
 frame.start()
