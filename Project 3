@@ -21,21 +21,24 @@ I50 = simplegui.load_image('http://thumbs.hh.ulximg.com/public/img/avatar/500_13
 ICAR = simplegui.load_image('http://4.bp.blogspot.com/-Jb0tgFtBByM/UvpGPMC8psI/AAAAAAAAAPE/ByAbeJWQBZM/s1600/auto+clipart+2.png')
 #ROCK
 IROCK = simplegui.load_image('http://newsdesk.si.edu/sites/default/files/imagecache/snapshot_image/PlymouthRockPiece.jpg')
-
-
+#KATE BUSH
+IBUSH = simplegui.load_image('http://images.musictimes.com/data/images/full/4166/kate-bush.png')
 
 # Save image widths as a list and image heights as another 
 img_width = [IBOY.get_width(),IWIN.get_width(),IRICK.get_width(),
-              IMONT.get_width(),I50.get_width(),ICAR.get_width(),IROCK.get_width()]
+              IMONT.get_width(),I50.get_width(),ICAR.get_width(),
+              IROCK.get_width(),IBUSH.get_width()]
 
 img_height = [IBOY.get_height(),IWIN.get_height(),IRICK.get_height(),
-              IMONT.get_height(),I50.get_height(),ICAR.get_height(),IROCK.get_height()]
+              IMONT.get_height(),I50.get_height(),ICAR.get_height(),
+              IROCK.get_height(),IBUSH.get_height()]
 
 # Create a dictionary that links images to their width
 # and height.
 IMG_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1]),
            IRICK:(img_width[2],img_height[2]), IMONT:(img_width[3],img_height[3]),
-           I50:(img_width[4],img_height[4]),ICAR:(img_width[5],img_height[5]),IROCK:(img_width[6],img_height[6])}
+           I50:(img_width[4],img_height[4]),ICAR:(img_width[5],img_height[5]),
+           IROCK:(img_width[6],img_height[6]),IBUSH: (img_width[7],img_height[7])}
 
 
 # Define global variables (constants should be in all caps)
@@ -137,6 +140,11 @@ def draw_handler(canvas):
     #IROCK
     canvas.draw_image(IROCK, (img_width[6]/2,img_height[6]/2), (IMG_SIZE.get(IROCK)), (700, 700), (200, 200))
     canvas.draw_image(IROCK, (img_width[6]/2,img_height[6]/2), (IMG_SIZE.get(IROCK)), (100, 700), (200, 200))
+    
+    #IBUSH
+    canvas.draw_image(IBUSH, (img_width[7]/2,img_height[7]/2), (IMG_SIZE.get(IBUSH)), (500, 700), (200, 200))
+    canvas.draw_image(IBUSH, (img_width[7]/2,img_height[7]/2), (IMG_SIZE.get(IBUSH)), (700, 300), (200, 200))
+    
 # Create frame and add a button and label for turns
 frame = simplegui.create_frame('MEMORY', 800, 800)
 
