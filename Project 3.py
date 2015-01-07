@@ -2,8 +2,6 @@
 import random
 import simplegui
 
-global IBOY,IWIN,IRICK,IMONT,I50,img_width,img_height,IMG_SIZE
-
 # Load images and save to a list
 image_list = []
 
