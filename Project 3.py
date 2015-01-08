@@ -3,7 +3,7 @@ import random
 import simplegui
 
 # Load images and save to a list
-image_list = []
+
 
 #BOY
 IBOY = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg')
@@ -21,6 +21,13 @@ ICAR = simplegui.load_image('http://4.bp.blogspot.com/-Jb0tgFtBByM/UvpGPMC8psI/A
 IROCK = simplegui.load_image('http://newsdesk.si.edu/sites/default/files/imagecache/snapshot_image/PlymouthRockPiece.jpg')
 #KATE BUSH
 IBUSH = simplegui.load_image('http://images.musictimes.com/data/images/full/4166/kate-bush.png')
+
+image_list = [IBOY,IWIN,IRICK,IMONT,I50,ICAR,IROCK,IBUSH]
+image = image_list + image_list
+random.shuffle(image)
+print image
+
+
 
 # Save image widths as a list and image heights as another 
 img_width = [IBOY.get_width(),IWIN.get_width(),IRICK.get_width(),
@@ -45,7 +52,7 @@ IMG_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1])
 class Tile:
     
     # Definition of intializer
-    def __init__(self, image, exposed):
+    def __init__(self, image, exposed, location):
         self.image = image 
         self.exposed = exposed
         self.location = location
@@ -61,7 +68,10 @@ class Tile:
     # Expose the tile
     def set_expose_tile(self, exposed):
         self.exposed = exposed
-    
+        
+    def set_location(self, location):
+        self.location = location
+        
     def get_tilewidth(self):
         self.image = image
         image.get_width()
@@ -72,14 +82,13 @@ class Tile:
         
     # Hide the tile       
     def hide_tile(self):
-        pass
+        self.exposed = not exposed
         
     # Draw method for tiles.
     # Draws the image if the tile is exposed and a 
     # colored rectangle otherwise.
     def draw_tile(self, canvas):
         pass
-    
     # Selection method for tiles.
     # Returns True if the position of mouse click was 
     # anywhere within the boundary of the tile and False
@@ -97,12 +106,8 @@ class Tile:
 
     
 def new_game():     
-	fiftycent = Tile(I50, False)
+	pass
 
-	tiles = [fiftycent, bush]
-        
-        
-        
 # Define mouse click event handler
 # Handler should check wether two tiles have be clicked 
 # on previously. If they don't match, they should be 
@@ -120,39 +125,7 @@ def start_button():
 # Draw handler.
 # Calls the tile's draw_tile method for each tile.
 def draw_handler(canvas):
-        
-    #BOY
-    canvas.draw_image(IBOY, (img_width[0]/2,img_height[0]/2), (IMG_SIZE.get(IBOY)), (100, 100), (200, 200))
-    canvas.draw_image(IBOY, (img_width[0]/2,img_height[0]/2), (IMG_SIZE.get(IBOY)), (300, 500), (200, 200))
-    
-    #AARON
-    canvas.draw_image(IWIN, (img_width[1]/2,img_height[1]/2), (IMG_SIZE.get(IWIN)), (300, 300), (200, 200))
-    canvas.draw_image(IWIN, (img_width[1]/2,img_height[1]/2), (IMG_SIZE.get(IWIN)), (300, 700), (200, 200))
-    
-    #RICK
-    canvas.draw_image(IRICK, (img_width[2]/2,img_height[2]/2), (IMG_SIZE.get(IRICK)), (300, 100), (200, 200))
-    canvas.draw_image(IRICK, (img_width[2]/2,img_height[2]/2), (IMG_SIZE.get(IRICK)), (500, 300), (200, 200))
-    
-    #MONT
-    canvas.draw_image(IMONT, (img_width[3]/2,img_height[3]/2), (IMG_SIZE.get(IMONT)), (500, 100), (200, 200))
-    canvas.draw_image(IMONT, (img_width[3]/2,img_height[3]/2), (IMG_SIZE.get(IMONT)), (500, 500), (200, 200))
-    
-    #50 CENT
-    canvas.draw_image(I50, (img_width[4]/2,img_height[4]/2), (IMG_SIZE.get(I50)), (100, 500), (200, 200))
-    canvas.draw_image(I50, (img_width[4]/2,img_height[4]/2), (IMG_SIZE.get(I50)), (100, 300), (200, 200))
-    
-    #ICAR
-    canvas.draw_image(ICAR, (img_width[5]/2,img_height[5]/2), (IMG_SIZE.get(ICAR)), (700, 100), (200, 200))
-    canvas.draw_image(ICAR, (img_width[5]/2,img_height[5]/2), (IMG_SIZE.get(ICAR)), (700, 500), (200, 200))
-    
-    #IROCK
-    canvas.draw_image(IROCK, (img_width[6]/2,img_height[6]/2), (IMG_SIZE.get(IROCK)), (700, 700), (200, 200))
-    canvas.draw_image(IROCK, (img_width[6]/2,img_height[6]/2), (IMG_SIZE.get(IROCK)), (100, 700), (200, 200))
-    
-    #IBUSH
-    canvas.draw_image(IBUSH, (img_width[7]/2,img_height[7]/2), (IMG_SIZE.get(IBUSH)), (500, 700), (200, 200))
-    canvas.draw_image(IBUSH, (img_width[7]/2,img_height[7]/2), (IMG_SIZE.get(IBUSH)), (700, 300), (200, 200))
-    
+    pass
 # Create frame and add a button and label for turns
 frame = simplegui.create_frame('MEMORY', 800, 800)
 
