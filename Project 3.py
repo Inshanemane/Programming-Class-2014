@@ -37,7 +37,7 @@ img_height = [IBOY.get_height(),IWIN.get_height(),IRICK.get_height(),
 
 # Create a dictionary that links images to their width
 # and height.
-IMG_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1]),
+IMAGE_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1]),
            IRICK:(img_width[2],img_height[2]), IMONT:(img_width[3],img_height[3]),
            I50:(img_width[4],img_height[4]),ICAR:(img_width[5],img_height[5]),
            IROCK:(img_width[6],img_height[6]),IBUSH: (img_width[7],img_height[7])}
@@ -87,15 +87,18 @@ class Tile:
     # Draws the image if the tile is exposed and a 
     # colored rectangle otherwise.
     def draw_tile(self, canvas):
-        
+        canvas.draw_image(self.image, (IMAGE_SIZE[self.image][0]/2,IMAGE_SIZE[self.image][1]/2), IMAGE_SIZE[self.image],self.location,(TILE_WIDTH,TILE_HEIGHT))
     # Selection method for tiles.
     # Returns True if the position of mouse click was 
     # anywhere within the boundary of the tile and False
     # otherwise.
     def is_selected(self, position):
-        pass
-
-
+        top = IMAGE_SIZE[self.image][1] + TILE_HEIGHT/2
+        bot = IMAGE_SIZE[self.image][1] - TILE_HEIGHT/2
+        right = IMAGE_SIZE[self.image][0] + TILE_WIDTH/2
+        left = IMAGE_SIZE[self.image][0] - TILE_WIDTH/2
+		
+		
 # Define helper function to initialize globals. Function
 # should create an image list with two of each image, 
 # then use random.shuffle to change the order. Each image
@@ -112,10 +115,10 @@ def new_game():
         row = i//4
         col = i%4
         x = TILE_WIDTH/2 + TILE_WIDTH * col
-        y = TILE_HEIGHT/2 + TILE_HEGIHT * row
+        y = TILE_HEIGHT/2 + TILE_HEIGHT * row
         newtiles.append(Tile(image,False,(x,y)))
         i+=1                  
-		
+        
 # Define mouse click event handler
 # Handler should check wether two tiles have be clicked 
 # on previously. If they don't match, they should be 
@@ -133,7 +136,11 @@ def start_button():
 # Draw handler.
 # Calls the tile's draw_tile method for each tile.
 def draw_handler(canvas):
-    pass
+    for tile in newtiles:
+        tile.draw_tile(canvas)
+    
+    
+    
 # Create frame and add a button and label for turns
 frame = simplegui.create_frame('MEMORY', 800, 800)
 
