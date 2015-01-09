@@ -23,11 +23,8 @@ IROCK = simplegui.load_image('http://newsdesk.si.edu/sites/default/files/imageca
 IBUSH = simplegui.load_image('http://images.musictimes.com/data/images/full/4166/kate-bush.png')
 
 image_list = [IBOY,IWIN,IRICK,IMONT,I50,ICAR,IROCK,IBUSH]
-image = image_list + image_list
-random.shuffle(image)
-print image
-
-
+images = image_list + image_list
+newtiles = []
 
 # Save image widths as a list and image heights as another 
 img_width = [IBOY.get_width(),IWIN.get_width(),IRICK.get_width(),
@@ -47,6 +44,8 @@ IMG_SIZE = {IBOY:(img_width[0],img_height[0]), IWIN:(img_width[1],img_height[1])
 
 
 # Define global variables (constants should be in all caps)
+TILE_WIDTH  = 200
+TILE_HEIGHT = 200
 
 # Definition of a Tile class
 class Tile:
@@ -88,7 +87,7 @@ class Tile:
     # Draws the image if the tile is exposed and a 
     # colored rectangle otherwise.
     def draw_tile(self, canvas):
-        pass
+        
     # Selection method for tiles.
     # Returns True if the position of mouse click was 
     # anywhere within the boundary of the tile and False
@@ -106,8 +105,17 @@ class Tile:
 
     
 def new_game():     
-	pass
-
+    global TILE_WIDTH, TILE_HEIGHT
+    random.shuffle(images)
+    i = 0
+    for image in images:
+        row = i//4
+        col = i%4
+        x = TILE_WIDTH/2 + TILE_WIDTH * col
+        y = TILE_HEIGHT/2 + TILE_HEGIHT * row
+        newtiles.append(Tile(image,False,(x,y)))
+        i+=1                  
+		
 # Define mouse click event handler
 # Handler should check wether two tiles have be clicked 
 # on previously. If they don't match, they should be 
