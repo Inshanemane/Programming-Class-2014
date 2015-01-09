@@ -65,23 +65,12 @@ class Tile:
         return self.exposed 
     
     # Expose the tile
-    def set_expose_tile(self, exposed):
-        self.exposed = exposed
-        
-    def set_location(self, location):
-        self.location = location
-        
-    def get_tilewidth(self):
-        self.image = image
-        image.get_width()
-    
-    def get_tileheight(self):
-        self.image = image
-        image.get_height()
+    def expose_tile(self):
+        self.exposed = True
         
     # Hide the tile       
     def hide_tile(self):
-        self.exposed = not exposed
+        self.exposed = False
         
     # Draw method for tiles.
     # Draws the image if the tile is exposed and a 
@@ -93,12 +82,12 @@ class Tile:
     # anywhere within the boundary of the tile and False
     # otherwise.
     def is_selected(self, position):
-        top = IMAGE_SIZE[self.image][1] + TILE_HEIGHT/2
-        bot = IMAGE_SIZE[self.image][1] - TILE_HEIGHT/2
-        right = IMAGE_SIZE[self.image][0] + TILE_WIDTH/2
-        left = IMAGE_SIZE[self.image][0] - TILE_WIDTH/2
-		
-		
+        top = self.location[1] - TILE_HEIGHT/2
+        bot = self.location[1] + TILE_HEIGHT/2
+        right = self.location[0] + TILE_WIDTH/2
+        left = self.location[0] - TILE_WIDTH/2
+        return left < postition[0] < right and top < positition[1] < bot
+        
 # Define helper function to initialize globals. Function
 # should create an image list with two of each image, 
 # then use random.shuffle to change the order. Each image
@@ -127,11 +116,25 @@ def new_game():
 # variable can be used to determine whether it's the 
 # first tile of a pair or the second.
 def mouse_click(position):
-    pass
-
+    if state == 1:
+        if tile1.get_image() != tile2.get_image():
+            tile1.hide_tile()
+            tile2.hide_tile()
+        for tile in tiles:
+            if tile.is_selected(position):
+                tile1 = tile 
+                tile1.expose_tile()
+                state = 2
+    else:
+        for tile in tiles:
+            if tile.is_selected(position):
+                tile2 = tile 
+                tile2.expose_tile()
+                state = 1
+                
 # Start button handler
 def start_button():
-    pass
+    new_game()
     
 # Draw handler.
 # Calls the tile's draw_tile method for each tile.
@@ -149,9 +152,11 @@ frame = simplegui.create_frame('MEMORY', 800, 800)
 
 # Initialize 2 dummy tiles to be used in mouse click 
 # handler to keep track of the current 2 tiles.
-
-
+tile1 = Tile(IBOY,False,(20,20))
+tile2 = Tile(IBOY,False,(20,20))
 # Start frame
 new_game()
 frame.set_draw_handler(draw_handler)
+frame.set_mouseclick_handler(mouse_click)
+frame
 frame.start()
