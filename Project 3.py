@@ -76,7 +76,10 @@ class Tile:
     # Draws the image if the tile is exposed and a 
     # colored rectangle otherwise.
     def draw_tile(self, canvas):
-        canvas.draw_image(self.image, (IMAGE_SIZE[self.image][0]/2,IMAGE_SIZE[self.image][1]/2), IMAGE_SIZE[self.image],self.location,(TILE_WIDTH,TILE_HEIGHT))
+        if self.exposed:
+            canvas.draw_image(self.image, (IMAGE_SIZE[self.image][0]/2,IMAGE_SIZE[self.image][1]/2), IMAGE_SIZE[self.image],self.location,(TILE_WIDTH,TILE_HEIGHT))
+        #else:
+            #canvas.draw_image(
     # Selection method for tiles.
     # Returns True if the position of mouse click was 
     # anywhere within the boundary of the tile and False
@@ -86,7 +89,7 @@ class Tile:
         bot = self.location[1] + TILE_HEIGHT/2
         right = self.location[0] + TILE_WIDTH/2
         left = self.location[0] - TILE_WIDTH/2
-        return left < postition[0] < right and top < positition[1] < bot
+        return left < position[0] < right and top < position[1] < bot
         
 # Define helper function to initialize globals. Function
 # should create an image list with two of each image, 
@@ -97,7 +100,8 @@ class Tile:
 
     
 def new_game():     
-    global TILE_WIDTH, TILE_HEIGHT
+    global state
+    state = 1
     random.shuffle(images)
     i = 0
     for image in images:
@@ -116,17 +120,18 @@ def new_game():
 # variable can be used to determine whether it's the 
 # first tile of a pair or the second.
 def mouse_click(position):
+    global state, tile1, tile2
     if state == 1:
         if tile1.get_image() != tile2.get_image():
             tile1.hide_tile()
             tile2.hide_tile()
-        for tile in tiles:
+        for tile in newtiles:
             if tile.is_selected(position):
                 tile1 = tile 
                 tile1.expose_tile()
                 state = 2
     else:
-        for tile in tiles:
+        for tile in newtiles:
             if tile.is_selected(position):
                 tile2 = tile 
                 tile2.expose_tile()
