@@ -5,12 +5,13 @@ num_run2 = 0
 def fibo(n):
     global num_run2
     if n == 1 or n == 2:
+        num_run2+=1
         return 1
     
     else:
         num2 = fibo(n-2)+fibo(n-1)
         print 'return',num2
-        num_run2+=1
+        
         return num2
 
 print fibo(7)
@@ -29,6 +30,7 @@ def new_fibo(n):
     global fibo_dic, num_run
     
     if n == 1 or n == 2:
+        num_run+=1
         return 1
     
     elif fibo_dic.has_key(n):
@@ -39,7 +41,7 @@ def new_fibo(n):
         num = new_fibo(n-2) + new_fibo(n-1)
         fibo_dic[n] = num
         print 'return',num
-        num_run+=1
+        
         return num
                
 print new_fibo(7)
