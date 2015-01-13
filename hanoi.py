@@ -2,11 +2,14 @@
 
 def hanoi(n):
     if n == 1:
-        print "Turns required: 1"
+        print "Turns required:"
+        return 1
     else:
-       recursive = 2*(n+1)+1
+       recurse= 2*hanoi(n-1)+1
+       return recurse
        
-       return recursive
+       
+       
        
     
-print hanoi(4) 
+print hanoi(7) 
