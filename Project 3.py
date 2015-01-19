@@ -125,13 +125,14 @@ class Tile:
 # should then be initialized as a new Tile object with
 # its own position on the canvas. These tiles should be 
 # saved into a global list of tiles.    
-def new_game():     
-    
-    global state
+def new_game():    
+    global state,turn
     state = 1
     random.shuffle(images)
     i = 0
    
+    turn = 0
+    label1.set_text(str(turn))
     
     for image in images:
         row = i//4
@@ -151,29 +152,33 @@ def new_game():
 # variable can be used to determine whether it's the 
 # first tile of a pair or the second.
 def mouse_click(position):
-    global state, tile1, tile2, turn, label1
+    global state, tile1, tile2, turn, label1, tile
     
     if state == 1:
        
         if tile1.get_image() != tile2.get_image():
-            
             tile1.hide_tile()
             tile2.hide_tile()
-                       
-            label1.set_text(str(turn))
             
+            label1.set_text(str(turn))
+        
+        
         for tile in newtiles:
             if tile.is_selected(position):
-                tile1 = tile 
+                tile1 = tile
                 tile1.expose_tile()
-                state = 2
                 
+                state = 2
                 label1.set_text(str(turn))
+    
     else:
         for tile in newtiles:
             if tile.is_selected(position):
-                tile2 = tile 
+                tile2 = tile
                 tile2.expose_tile()
+                if tile1.get_image() == tile2.get_image():
+                    newtiles.remove(tile)
+                    newtiles.remove(tile1)
                 state = 1
                 turn +=1
                 label1.set_text(str(turn))
