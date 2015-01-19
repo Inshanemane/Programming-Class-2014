@@ -159,7 +159,7 @@ def mouse_click(position):
             
             tile1.hide_tile()
             tile2.hide_tile()
-            turn += 1            
+                       
             label1.set_text(str(turn))
             
         for tile in newtiles:
@@ -167,7 +167,7 @@ def mouse_click(position):
                 tile1 = tile 
                 tile1.expose_tile()
                 state = 2
-                turn += 1
+                
                 label1.set_text(str(turn))
     else:
         for tile in newtiles:
