@@ -110,14 +110,19 @@ class Tile:
     # anywhere within the boundary of the tile and False
     # otherwise.
     def is_selected(self, position):
-       
+        
         top = self.location[1] - TILE_HEIGHT/2
         bot = self.location[1] + TILE_HEIGHT/2
         right = self.location[0] + TILE_WIDTH/2
         left = self.location[0] - TILE_WIDTH/2
         return left < position[0] < right and top < position[1] < bot
         
-        
+    def is_selected2(self, position):
+       top = self.location[1] - TILE_HEIGHT/2
+       bot = self.location[1] + TILE_HEIGHT/2
+       right = self.location[0] + TILE_WIDTH/2
+       left = self.location[0] - TILE_WIDTH/2
+       return left < position[0] < right and top < position[1] < bot   
         
 # Define helper function to initialize globals. Function
 # should create an image list with two of each image, 
@@ -157,10 +162,11 @@ def mouse_click(position):
     if state == 1:
        
         if tile1.get_image() != tile2.get_image():
-            tile1.hide_tile()
-            tile2.hide_tile()
             
-            label1.set_text(str(turn))
+                tile1.hide_tile()
+                tile2.hide_tile()
+            
+                label1.set_text(str(turn))
         
         
         for tile in newtiles:
@@ -173,16 +179,19 @@ def mouse_click(position):
     
     else:
         for tile in newtiles:
-            if tile.is_selected(position):
+            if tile.is_selected2(position) and tile.is_selected2(position) != tile1.is_selected(position):
                 tile2 = tile
+                
                 tile2.expose_tile()
                 if tile1.get_image() == tile2.get_image():
-                    newtiles.remove(tile2)
-                    newtiles.remove(tile1)
+                    if tile1.is_selected(position) != tile2.is_selected2(position):
+                        newtiles.remove(tile2)
+                        newtiles.remove(tile1)
                 state = 1
                 turn +=1
                 label1.set_text(str(turn))
-                
+            else:
+                tile1.hide_tile()       
 # Start button handler
 def start_button():
     new_game()
