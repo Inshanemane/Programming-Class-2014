@@ -103,7 +103,7 @@ class Tile:
         elif self.exposed == False:
             canvas.draw_image(BACK, (121/2,175/2), (121,175),self.location,(TILE_WIDTH,TILE_HEIGHT))
             
-            
+         
             
     # Selection method for tiles.
     # Returns True if the position of mouse click was 
@@ -152,7 +152,7 @@ def new_game():
 # variable can be used to determine whether it's the 
 # first tile of a pair or the second.
 def mouse_click(position):
-    global state, tile1, tile2, turn, label1, tile
+    global state, tile1, tile2, turn, label1, location
     
     if state == 1:
        
@@ -177,7 +177,7 @@ def mouse_click(position):
                 tile2 = tile
                 tile2.expose_tile()
                 if tile1.get_image() == tile2.get_image():
-                    newtiles.remove(tile)
+                    newtiles.remove(tile2)
                     newtiles.remove(tile1)
                 state = 1
                 turn +=1
@@ -192,6 +192,9 @@ def start_button():
 # Draw handler.
 # Calls the tile's draw_tile method for each tile.
 def draw_handler(canvas):
+    canvas.draw_text('You Win', (20, 200), 200, 'Red')
+    canvas.draw_text('You Win', (20, 450), 200, 'Red') 
+    canvas.draw_text('You Win', (20, 700), 200, 'Red')
     for tile in newtiles:
         tile.draw_tile(canvas)
     
