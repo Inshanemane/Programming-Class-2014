@@ -1,4 +1,4 @@
-#feelin it
+#Memory Game
 import random
 import simplegui
 
@@ -6,6 +6,8 @@ import simplegui
 
 #Turn Counter
 turn = 0
+
+
 
 #BOY
 IBOY = simplegui.load_image('https://pbs.twimg.com/profile_images/462240009374801920/4D8Njtdg.jpeg')
@@ -23,10 +25,12 @@ ICAR = simplegui.load_image('http://4.bp.blogspot.com/-Jb0tgFtBByM/UvpGPMC8psI/A
 IROCK = simplegui.load_image('http://newsdesk.si.edu/sites/default/files/imagecache/snapshot_image/PlymouthRockPiece.jpg')
 #KATE BUSH
 IBUSH = simplegui.load_image('http://images.musictimes.com/data/images/full/4166/kate-bush.png')
-
+#YUGIOH CARD BACKING
 BACK = simplegui.load_image('http://img3.wikia.nocookie.net/__cb20110624090942/yugioh/images/thumb/9/94/Back-Anime-2.png/121px-Back-Anime-2.png')
 
 
+
+#Image list for drawing and connecting images to their dimensions
 image_list = [IBOY,IWIN,IRICK,IMONT,I50,ICAR,IROCK,IBUSH]
 images = image_list + image_list
 newtiles = []
@@ -117,12 +121,17 @@ class Tile:
         left = self.location[0] - TILE_WIDTH/2
         return left < position[0] < right and top < position[1] < bot
         
+        
+    #Second is selected function so that both can be compared to make
+	#sure that the same square is not being selected    
     def is_selected2(self, position):
        top = self.location[1] - TILE_HEIGHT/2
        bot = self.location[1] + TILE_HEIGHT/2
        right = self.location[0] + TILE_WIDTH/2
        left = self.location[0] - TILE_WIDTH/2
        return left < position[0] < right and top < position[1] < bot   
+        
+        
         
 # Define helper function to initialize globals. Function
 # should create an image list with two of each image, 
@@ -157,15 +166,15 @@ def new_game():
 # variable can be used to determine whether it's the 
 # first tile of a pair or the second.
 def mouse_click(position):
-    global state, tile1, tile2, turn, label1, location
+    global state, tile1, tile2, turn, label1, location    
     
     if state == 1:
        
-        if tile1.get_image() != tile2.get_image():
-            
+        if tile1.get_image() != tile2.get_image():            
                 tile1.hide_tile()
                 tile2.hide_tile()
-            
+            	
+                #Changes label to current
                 label1.set_text(str(turn))
         
         
@@ -175,23 +184,33 @@ def mouse_click(position):
                 tile1.expose_tile()
                 
                 state = 2
+                
+                #Changes label to current
                 label1.set_text(str(turn))
     
     else:
         for tile in newtiles:
             if tile.is_selected2(position) and tile.is_selected2(position) != tile1.is_selected(position):
-                tile2 = tile
-                
+                tile2 = tile                
                 tile2.expose_tile()
+                
+                #Removes tile if both are the same image, but not
+                #the same square
                 if tile1.get_image() == tile2.get_image():
                     if tile1.is_selected(position) != tile2.is_selected2(position):
                         newtiles.remove(tile2)
                         newtiles.remove(tile1)
+                
                 state = 1
-                turn +=1
+                turn +=1               
                 label1.set_text(str(turn))
+            
+            #Makes it so that the tile will be hidden if clicked twice
             else:
-                tile1.hide_tile()       
+                tile1.hide_tile()   
+              
+                
+                
 # Start button handler
 def start_button():
     new_game()
@@ -201,9 +220,11 @@ def start_button():
 # Draw handler.
 # Calls the tile's draw_tile method for each tile.
 def draw_handler(canvas):
+    #Draws You Win text under layers of cards
     canvas.draw_text('You Win', (20, 200), 200, 'Red')
     canvas.draw_text('You Win', (20, 450), 200, 'Red') 
     canvas.draw_text('You Win', (20, 700), 200, 'Red')
+    
     for tile in newtiles:
         tile.draw_tile(canvas)
     
@@ -213,6 +234,8 @@ def draw_handler(canvas):
 frame = simplegui.create_frame('MEMORY', 800, 800)
 button1 = frame.add_button('Restart', start_button)
 label1 = frame.add_label(str(turn))
+
+
 
 # Initialize 2 dummy tiles to be used in mouse click 
 # handler to keep track of the current 2 tiles.
