@@ -4,8 +4,8 @@
 import simplegui
 import random
 
-FRAME_WIDTH = 300
-FRAME_HEIGHT = 300
+FRAME_WIDTH = 400
+FRAME_HEIGHT = 400
 colour_location = 0
 
 
@@ -56,32 +56,37 @@ def timer_handler():
                                     'A','B','C','E','F'])
     
     banner.colour = new_colour
+   
     
+def keyswitch():
+    pass
+
     
 def keydown(key):
     if key == simplegui.KEY_MAP['left']:
         banner.vel[0] -= 1
     elif key == simplegui.KEY_MAP['right']:
         banner.vel[0] += banner.acc
-
-def keyup(key):
-    if key == simplegui.KEY_MAP['up']:
+    elif key == simplegui.KEY_MAP['up']:
         banner.vel[1] -= 1
     elif key == simplegui.KEY_MAP['down']:
         banner.vel[1] += banner.acc
+    
         
         
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Home", FRAME_WIDTH, FRAME_HEIGHT)
 frame.set_draw_handler(draw)
+
+
 frame.set_keydown_handler(keydown)
-frame.set_keydown_handler(keyup)
+
 timer = simplegui.create_timer(5, timer_handler)
 
 # Start the frame animation
 banner = Banner(">>[]||||[]\/\(O)>", [50,250], "blue", 24, [1,0], 1)
 inp = frame.add_input('Change message', message_handler, 100)
 frame.add_button("Confirm", click_message_change)
-
+frame.add_button('SWITCH _|_', keyswitch, 100)
 frame.start()
 timer.start()
