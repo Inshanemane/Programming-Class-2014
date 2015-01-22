@@ -1,4 +1,4 @@
-# A program that draws a background image on the canvas with a banner 
+# A pogram that draws a background image on the canvas with a banner 
 # message over it that streams across the bottom.  
 
 import simplegui
@@ -76,7 +76,8 @@ def keydown(key):
     
     
     
-def keyup(key):
+def keyup(key): 
+    global new_colour
     if key == simplegui.KEY_MAP['r']:
         banner.pos[0] = 130
         banner.pos[1] = 200
@@ -89,6 +90,10 @@ def keyup(key):
         banner.vel[1] = 0
         banner.pos[0] = 130
         banner.pos[1] = 200
+        
+    elif key == simplegui.KEY_MAP['4']:
+        banner.set_text('$$$$')
+        banner.colour = 'yellow'
         
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Home", FRAME_WIDTH, FRAME_HEIGHT)
