@@ -86,15 +86,19 @@ def keyup(key):
         banner.vel[1] = 0
         
     elif key == simplegui.KEY_MAP['q']:     
+        banner.set_text('>>[]||||[]\/\(O)>')
         banner.vel[0] = 0
         banner.vel[1] = 0
         banner.pos[0] = 130
         banner.pos[1] = 200
+        timer.start()
         
     elif key == simplegui.KEY_MAP['4']:
-        banner.set_text('$$$$')
+        banner.set_text('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')        
+        timer.stop()
         banner.colour = 'yellow'
-        
+        banner.vel[0] = 90
+        banner.vel[1] = 900
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Home", FRAME_WIDTH, FRAME_HEIGHT)
 frame.set_draw_handler(draw)
@@ -107,5 +111,10 @@ timer = simplegui.create_timer(100, timer_handler)
 banner = Banner(">>[]||||[]\/\(O)>", [50,250], "blue", 24, [1,0], 1)
 inp = frame.add_input('Change message', message_handler, 100)
 frame.add_button("Confirm", click_message_change)
+frame.add_label('')
+frame.add_label('q : Full Reset')
+frame.add_label('r : Reset')
+frame.add_label('z : Stop')
+frame.add_label('4 : Money')
 frame.start()
 timer.start()
