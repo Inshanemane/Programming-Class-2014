@@ -26,7 +26,7 @@ class Banner:
         for i in range(2):
             self.pos[i] += self.vel[i]
         self.pos[0] = self.pos[0] % FRAME_WIDTH
-        
+        self.pos[1] = self.pos[1] % FRAME_HEIGHT
         
     def set_text(self, new_message):
         if len(new_message) > 0:
@@ -64,22 +64,25 @@ def keydown(key):
         banner.vel[0] -= 1
     elif key == simplegui.KEY_MAP['right']:
         banner.vel[0] += banner.acc
+    elif key == simplegui.KEY_MAP['r']:
+        banner.pos[0] = 100
+        banner.pos[1] = 200
+    
     
 def keyup(key):
     if key == simplegui.KEY_MAP['up']:
         banner.vel[1] -= 1
     elif key == simplegui.KEY_MAP['down']:
         banner.vel[1] += banner.acc    
-   
+    
         
         
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Home", FRAME_WIDTH, FRAME_HEIGHT)
 frame.set_draw_handler(draw)
 
-
-frame.set_keydown_handler(keydown)
-frame.set_keyup_handler(keyup)
+frame.set_keyup_handler(keydown)
+frame.set_keydown_handler(keyup)
 timer = simplegui.create_timer(5, timer_handler)
 
 # Start the frame animation
