@@ -8,6 +8,7 @@ FRAME_WIDTH = 400
 FRAME_HEIGHT = 400
 colour_location = 0
 
+money = simplegui.load_image('http://watsupplies.com/wp-content/uploads/2014/10/money-pppp.png')
 
 class Banner:
     def __init__(self, message, pos, colour, size, vel, acc):
@@ -47,6 +48,7 @@ def click_message_change():
 
 # Handler to draw on canvas
 def draw(canvas):
+    canvas.draw_image(money, (1521 // 2, 1818 // 2), (1521, 1818), (40, 70), (100, 100), 2)
     banner.draw(canvas)
     banner.update()
 
@@ -99,6 +101,7 @@ def keyup(key):
         banner.colour = 'yellow'
         banner.vel[0] = 90
         banner.vel[1] = 900
+        
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Home", FRAME_WIDTH, FRAME_HEIGHT)
 frame.set_draw_handler(draw)
