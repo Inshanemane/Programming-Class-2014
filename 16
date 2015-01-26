@@ -1,4 +1,4 @@
-# A pogram that draws a background image on the canvas with a banner 
+# A program that draws a background image on the canvas with a banner 
 # message over it that streams across the bottom.  
 
 import simplegui
@@ -32,7 +32,8 @@ class Banner:
             self.pos[i] += self.vel[i]
         self.pos[0] = self.pos[0] % FRAME_WIDTH
         self.pos[1] = self.pos[1] % FRAME_HEIGHT
-        
+        if self.pos[0] >= 200:
+            self.vel[0] -=10
     def set_text(self, new_message):
         if len(new_message) > 0:
             self.message = new_message
@@ -146,6 +147,7 @@ frame.add_label('q : Full Reset')
 frame.add_label('r : Reset')
 frame.add_label('z : Stop')
 frame.add_label('4 : Money')
+frame.add_label('b : Change background')
 frame.add_label('')
 frame.add_label('Automatic Colour')
 frame.add_label('------------------')
