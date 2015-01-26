@@ -42,9 +42,15 @@ def message_handler(text_input):
 
 
 def click_message_change():
-    banner.set_text(inp.get_text())  
+    banner.set_text(inp.get_text()) 
 
-
+    
+#manual colour change
+def message_handler2(text_input):
+    pass
+    
+def colour_change():
+    banner.colour = inp2.get_text()
 
 # Handler to draw on canvas
 def draw(canvas):
@@ -101,23 +107,37 @@ def keyup(key):
         banner.colour = 'yellow'
         banner.vel[0] = 90
         banner.vel[1] = 900
-        
+     
+    elif key == simplegui.KEY_MAP['o']:
+        timer.stop()
+    
+    elif key == simplegui.KEY_MAP['p']:
+        timer.start()
+    
+    
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Home", FRAME_WIDTH, FRAME_HEIGHT)
+timer = simplegui.create_timer(100, timer_handler)
 frame.set_draw_handler(draw)
 
 frame.set_keyup_handler(keydown)
 frame.set_keydown_handler(keyup)
-timer = simplegui.create_timer(100, timer_handler)
+
 
 # Start the frame animation
 banner = Banner(">>[]||||[]\/\(O)>", [50,250], "blue", 24, [1,0], 1)
 inp = frame.add_input('Change message', message_handler, 100)
 frame.add_button("Confirm", click_message_change)
+inp2 = frame.add_input('Change colour', message_handler2, 100)
+frame.add_button("Confirm", colour_change)
 frame.add_label('')
 frame.add_label('q : Full Reset')
 frame.add_label('r : Reset')
 frame.add_label('z : Stop')
 frame.add_label('4 : Money')
+frame.add_label('')
+frame.add_label('Automatic Colour')
+frame.add_label('------------------')
+frame.add_label('p : Start')
+frame.add_label('o : Stop')
 frame.start()
-timer.start()
