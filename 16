@@ -4,14 +4,14 @@
 import simplegui
 import random
 
-FRAME_WIDTH = 400
-FRAME_HEIGHT = 400
+FRAME_WIDTH = 600
+FRAME_HEIGHT = 600
 colour_location = 0
 
 money = simplegui.load_image('http://watsupplies.com/wp-content/uploads/2014/10/money-pppp.png')
 
 background = 'joe'
-
+bouncev = 'neither'
 sky = simplegui.load_image('http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG')
 
 class Banner:
@@ -29,16 +29,34 @@ class Banner:
     def update(self):
         # x += v
         for i in range(2):
-            self.pos[i] += self.vel[i]
-        self.pos[0] = self.pos[0] % FRAME_WIDTH
-        self.pos[1] = self.pos[1] % FRAME_HEIGHT
-        if self.pos[0] >= 200:
-            self.vel[0] -=10
+            self.pos[i] += self.vel[i]        
+        
+        #Bounce and repeat
+        if bouncev == 'no':
+            self.pos[0] = self.pos[0] % FRAME_WIDTH
+            self.pos[1] = self.pos[1] % FRAME_HEIGHT            
+        
+        elif bouncev == 'yes':
+            if self.pos[0] >= 560:
+                self.vel[0] -= 1
+            
+            if self.pos[0] <= 10:
+                self.vel[0] += 1
+            
+            if self.pos[1] >= 580:
+                self.vel[1] -= 1            
+            
+            if self.pos[1] <= 20:    
+                self.vel[1] += 1
+            
+            
     def set_text(self, new_message):
         if len(new_message) > 0:
             self.message = new_message
+    
     def get_text(self):
-        return self.message        
+        return self.message  
+    
     def set_colour(self, new_colour):
         self.colour = new_colour
    
@@ -66,12 +84,13 @@ def colour_change():
 # Handler to draw on canvas
 def draw(canvas):        
     if background == 'not joe':        
-        canvas.draw_image(sky, (sky.get_width() / 2, sky.get_height() / 2), (sky.get_width(), sky.get_height()), (200, 200), (400, 400),)
+        canvas.draw_image(sky, (sky.get_width() / 2, sky.get_height() / 2), (sky.get_width(), sky.get_height()), (300, 300), (600, 600),)
     if banner.get_text() == '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$':        
-        canvas.draw_image(money, (money.get_width() / 2, money.get_height() / 2), (money.get_width(), money.get_height()), (200, 200), (400, 400),)
+        canvas.draw_image(money, (money.get_width() / 2, money.get_height() / 2), (money.get_width(), money.get_height()), (300, 300), (600, 600),)
     banner.draw(canvas)
     banner.update()
 
+#Timer for colour
 def timer_handler():
     new_colour = "#"
     for i in range(6):
@@ -81,7 +100,7 @@ def timer_handler():
     
     banner.colour = new_colour
    
-    
+#Keys    
 def keydown(key):
     if key == simplegui.KEY_MAP['left']:
         banner.vel[0] -= 1
@@ -94,10 +113,10 @@ def keydown(key):
      
       
 def keyup(key): 
-    global new_colour, background
+    global new_colour, background, bouncev
     if key == simplegui.KEY_MAP['r']:
-        banner.pos[0] = 130
-        banner.pos[1] = 200
+        banner.pos[0] = 230
+        banner.pos[1] = 300
         
     elif key == simplegui.KEY_MAP['z']:     
         banner.vel[0] = 0
@@ -107,16 +126,18 @@ def keyup(key):
         banner.set_text('>>[]||||[]\/\(O)>')
         banner.vel[0] = 0
         banner.vel[1] = 0
-        banner.pos[0] = 130
-        banner.pos[1] = 200
+        banner.pos[0] = 230
+        banner.pos[1] = 300
         timer.start()
         background = 'joe'
+        bouncev = 'neither'
+        
     elif key == simplegui.KEY_MAP['4']:
         banner.set_text('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')        
         timer.stop()
         banner.colour = 'yellow'
         banner.vel[0] = 90
-        banner.vel[1] = 900
+        banner.vel[1] = 400
         
     elif key == simplegui.KEY_MAP['o']:
         timer.stop()
@@ -126,7 +147,13 @@ def keyup(key):
   
     elif key == simplegui.KEY_MAP['b']:     
         background = 'not joe'
-        
+    
+    elif key == simplegui.KEY_MAP['u']:
+        bouncev = 'yes'
+    
+    elif key == simplegui.KEY_MAP['i']:    
+        bouncev = 'no'
+    
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("FLY", FRAME_WIDTH, FRAME_HEIGHT)
 timer = simplegui.create_timer(100, timer_handler)
@@ -149,8 +176,17 @@ frame.add_label('z : Stop')
 frame.add_label('4 : Money')
 frame.add_label('b : Change background')
 frame.add_label('')
+frame.add_label('Movement')
+frame.add_label('----------')
+frame.add_label('u : Bounce')
+frame.add_label('i : Repeat')
+frame.add_label('')
 frame.add_label('Automatic Colour')
 frame.add_label('------------------')
 frame.add_label('p : Start')
 frame.add_label('o : Stop')
+frame.add_label('')
+frame.add_label('Hint:')
+frame.add_label('Money only works well with repeat on')
+
 frame.start()
