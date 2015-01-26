@@ -10,6 +10,10 @@ colour_location = 0
 
 money = simplegui.load_image('http://watsupplies.com/wp-content/uploads/2014/10/money-pppp.png')
 
+background = 'joe'
+
+sky = simplegui.load_image('http://upload.wikimedia.org/wikipedia/commons/1/16/Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG')
+
 class Banner:
     def __init__(self, message, pos, colour, size, vel, acc):
        self.message = message
@@ -32,10 +36,13 @@ class Banner:
     def set_text(self, new_message):
         if len(new_message) > 0:
             self.message = new_message
-            
+    def get_text(self):
+        return self.message        
     def set_colour(self, new_colour):
         self.colour = new_colour
-            
+   
+        
+        
 # Handler for mouse click
 def message_handler(text_input):
     pass
@@ -45,19 +52,24 @@ def click_message_change():
     banner.set_text(inp.get_text()) 
 
     
-#manual colour change
+    
+#Manual colour change
 def message_handler2(text_input):
     pass
     
 def colour_change():
     banner.colour = inp2.get_text()
 
+    
+    
 # Handler to draw on canvas
-def draw(canvas):
-    canvas.draw_image(money, (1521 // 2, 1818 // 2), (1521, 1818), (40, 70), (100, 100), 2)
+def draw(canvas):        
+    if background == 'not joe':        
+        canvas.draw_image(sky, (sky.get_width() / 2, sky.get_height() / 2), (sky.get_width(), sky.get_height()), (200, 200), (400, 400),)
+    if banner.get_text() == '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$':        
+        canvas.draw_image(money, (money.get_width() / 2, money.get_height() / 2), (money.get_width(), money.get_height()), (200, 200), (400, 400),)
     banner.draw(canvas)
     banner.update()
-
 
 def timer_handler():
     new_colour = "#"
@@ -68,7 +80,6 @@ def timer_handler():
     
     banner.colour = new_colour
    
-
     
 def keydown(key):
     if key == simplegui.KEY_MAP['left']:
@@ -79,16 +90,14 @@ def keydown(key):
         banner.vel[1] -= 1
     elif key == simplegui.KEY_MAP['down']:
         banner.vel[1] += banner.acc   
-    
-    
-    
-    
-    
+     
+      
 def keyup(key): 
-    global new_colour
+    global new_colour, background
     if key == simplegui.KEY_MAP['r']:
         banner.pos[0] = 130
         banner.pos[1] = 200
+        
     elif key == simplegui.KEY_MAP['z']:     
         banner.vel[0] = 0
         banner.vel[1] = 0
@@ -100,23 +109,25 @@ def keyup(key):
         banner.pos[0] = 130
         banner.pos[1] = 200
         timer.start()
-        
+        background = 'joe'
     elif key == simplegui.KEY_MAP['4']:
         banner.set_text('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')        
         timer.stop()
         banner.colour = 'yellow'
         banner.vel[0] = 90
         banner.vel[1] = 900
-     
+        
     elif key == simplegui.KEY_MAP['o']:
         timer.stop()
     
     elif key == simplegui.KEY_MAP['p']:
         timer.start()
-    
-    
+  
+    elif key == simplegui.KEY_MAP['b']:     
+        background = 'not joe'
+        
 # Create a frame and assign callbacks to event handlers
-frame = simplegui.create_frame("Home", FRAME_WIDTH, FRAME_HEIGHT)
+frame = simplegui.create_frame("FLY", FRAME_WIDTH, FRAME_HEIGHT)
 timer = simplegui.create_timer(100, timer_handler)
 frame.set_draw_handler(draw)
 
